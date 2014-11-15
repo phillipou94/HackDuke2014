@@ -1,0 +1,73 @@
+//
+//  ViewController.m
+//  DukeHack
+//
+//  Created by Phillip Ou on 11/14/14.
+//  Copyright (c) 2014 Phillip Ou. All rights reserved.
+//
+
+#import "ViewController.h"
+#import <Foundation/Foundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
+@interface ViewController () <MPMediaPickerControllerDelegate>
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //get all songs in your itunes
+    [self getSongsFromPhone];
+    
+
+}
+
+-(void)getSongsFromPhone
+{
+    MPMediaQuery *query = [MPMediaQuery songsQuery];
+    NSArray *arrayOfSongs = [query.items subarrayWithRange:NSMakeRange(0,30)];
+    
+    //multithread here
+    for(MPMediaItem *song in arrayOfSongs)
+    {
+        //[self getBeatsPerMinute:song];
+    }
+}
+
+-(void) getBeatsPerMinute:(MPMediaItem*)song
+{
+    NSString *artistName = [song valueForProperty: MPMediaItemPropertyArtist];
+    NSString *songName = [song valueForProperty:MPMediaItemPropertyTitle];
+    NSString *searchTerm = [NSString stringWithFormat:@"http://developer.echonest.com/api/v4/song/search?api_key=QVB3INMPBCFREX6N6&format=json&results=1&artist=%@&title=%@&bucket=audio_summary",artistName, songName];
+    searchTerm =[searchTerm stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    
+    //make get request to Echonest API
+    NSURL *url = [NSURL URLWithString:searchTerm];
+    NSData *data=[NSData dataWithContentsOfURL:url];
+    NSError *error=nil;
+    if(data)
+    {
+        id response=[NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error:&error];
+        NSMutableDictionary *results = (NSMutableDictionary*) response;
+        NSLog(@"search String:%@",searchTerm);
+        NSLog(@"%@",results);
+        NSDictionary *dic = results[@"response"];
+        
+        if(results[@"response"])
+        {
+            if([dic[@"songs"] count]>0)
+            {
+                NSDictionary *songDic = [dic[@"songs"] objectAtIndex:0];
+                NSDictionary *audioSummary = songDic[@"audio_summary"];
+                NSString *tempoString = audioSummary[@"tempo"];
+                CGFloat tempoFloat = [tempoString floatValue];
+                NSLog(@"tempo:%f",tempoFloat);
+                
+            }
+        }
+    }
+}
+
+@end
