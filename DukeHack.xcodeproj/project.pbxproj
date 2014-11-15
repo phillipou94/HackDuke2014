@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4D411B8E1A16ADE600A46C35 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B861A16ADE500A46C35 /* AudioToolbox.framework */; };
 		4D411B8F1A16ADE600A46C35 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B871A16ADE500A46C35 /* CoreAudio.framework */; };
-		4D411B901A16ADE600A46C35 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B881A16ADE500A46C35 /* AVFoundation.framework */; };
 		4D411B911A16ADE600A46C35 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B891A16ADE500A46C35 /* MediaPlayer.framework */; };
 		4D411B921A16ADE600A46C35 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B8A1A16ADE500A46C35 /* UIKit.framework */; };
 		4D411B931A16ADE600A46C35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D411B8B1A16ADE500A46C35 /* Foundation.framework */; };
@@ -24,6 +23,8 @@
 		4D68B96F1A16AD3D003285E4 /* DukeHackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D68B96E1A16AD3D003285E4 /* DukeHackTests.m */; };
 		4D7AF8C11A170C7D00DB5B66 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */; };
 		4D85AF711A17A379002E4C0D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85AF701A17A379002E4C0D /* CoreMedia.framework */; };
+		4D85AF761A17A7EF002E4C0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85AF751A17A7EF002E4C0D /* AVFoundation.framework */; };
+		4D9D93E01A17E60A001B5017 /* SongDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D93DF1A17E60A001B5017 /* SongDictionary.m */; };
 		62518C791A17769E00CBBCE2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62518C781A17769E00CBBCE2 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +42,6 @@
 		4D411B851A16ADE500A46C35 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreMedia.framework; sourceTree = "<group>"; };
 		4D411B861A16ADE500A46C35 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioToolbox.framework; sourceTree = "<group>"; };
 		4D411B871A16ADE500A46C35 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreAudio.framework; sourceTree = "<group>"; };
-		4D411B881A16ADE500A46C35 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVFoundation.framework; sourceTree = "<group>"; };
 		4D411B891A16ADE500A46C35 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MediaPlayer.framework; sourceTree = "<group>"; };
 		4D411B8A1A16ADE500A46C35 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UIKit.framework; sourceTree = "<group>"; };
 		4D411B8B1A16ADE500A46C35 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Foundation.framework; sourceTree = "<group>"; };
@@ -63,6 +63,9 @@
 		4D7AF8BF1A170C7D00DB5B66 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		4D85AF701A17A379002E4C0D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		4D85AF751A17A7EF002E4C0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4D9D93DE1A17E60A001B5017 /* SongDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDictionary.h; sourceTree = "<group>"; };
+		4D9D93DF1A17E60A001B5017 /* SongDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDictionary.m; sourceTree = "<group>"; };
 		62518C781A17769E00CBBCE2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -71,9 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D85AF761A17A7EF002E4C0D /* AVFoundation.framework in Frameworks */,
 				4D85AF711A17A379002E4C0D /* CoreMedia.framework in Frameworks */,
 				62518C791A17769E00CBBCE2 /* CoreLocation.framework in Frameworks */,
-				4D411B901A16ADE600A46C35 /* AVFoundation.framework in Frameworks */,
 				4D411B921A16ADE600A46C35 /* UIKit.framework in Frameworks */,
 				4D411B911A16ADE600A46C35 /* MediaPlayer.framework in Frameworks */,
 				4D411B8F1A16ADE600A46C35 /* CoreAudio.framework in Frameworks */,
@@ -96,12 +99,12 @@
 		4D411B951A16ADF200A46C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D85AF751A17A7EF002E4C0D /* AVFoundation.framework */,
 				4D85AF701A17A379002E4C0D /* CoreMedia.framework */,
 				62518C781A17769E00CBBCE2 /* CoreLocation.framework */,
 				4D411B851A16ADE500A46C35 /* CoreMedia.framework */,
 				4D411B861A16ADE500A46C35 /* AudioToolbox.framework */,
 				4D411B871A16ADE500A46C35 /* CoreAudio.framework */,
-				4D411B881A16ADE500A46C35 /* AVFoundation.framework */,
 				4D411B891A16ADE500A46C35 /* MediaPlayer.framework */,
 				4D411B8A1A16ADE500A46C35 /* UIKit.framework */,
 				4D411B8B1A16ADE500A46C35 /* Foundation.framework */,
@@ -139,6 +142,8 @@
 				4D68B95C1A16AD3B003285E4 /* Main.storyboard */,
 				4D4E3F571A1730E100DB1F56 /* MainViewController.h */,
 				4D4E3F581A1730E100DB1F56 /* MainViewController.m */,
+				4D9D93DE1A17E60A001B5017 /* SongDictionary.h */,
+				4D9D93DF1A17E60A001B5017 /* SongDictionary.m */,
 				4D68B95F1A16AD3B003285E4 /* Images.xcassets */,
 				4D68B9611A16AD3B003285E4 /* LaunchScreen.xib */,
 				4D68B9561A16AD3A003285E4 /* DukeHack.xcdatamodeld */,
@@ -276,6 +281,7 @@
 			files = (
 				4D68B9551A16AD3A003285E4 /* AppDelegate.m in Sources */,
 				4D68B9581A16AD3A003285E4 /* DukeHack.xcdatamodeld in Sources */,
+				4D9D93E01A17E60A001B5017 /* SongDictionary.m in Sources */,
 				4D7AF8C11A170C7D00DB5B66 /* LoadingViewController.m in Sources */,
 				4D4E3F591A1730E100DB1F56 /* MainViewController.m in Sources */,
 				4D68B9521A16AD39003285E4 /* main.m in Sources */,

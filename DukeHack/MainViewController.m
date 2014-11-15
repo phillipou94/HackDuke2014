@@ -9,6 +9,9 @@
 #import "MainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+#import "SongDictionary.h"
+#import "LoadingViewController.h"
 
 @interface MainViewController ()
 
@@ -21,8 +24,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *resumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) IBOutlet UIButton *beginButton;
-
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) MPMusicPlayerController *musicPlayer;
+@property (strong, nonatomic) SongDictionary *songDic;
 
 
 
@@ -34,19 +38,35 @@
     NSInteger seconds;
 }
 
+-(void)getSongs{
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SongDictionary" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:nil];
+    self.songDic=[fetchedObjects objectAtIndex:0];
+    NSLog(@"retrieved:%@",self.songDic.mapOfTempos);
+    LoadingViewController *loadView = [[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil];
+    if([self.songDic.mapOfTempos allKeys]<0){
+        [self presentViewController: loadView animated:NO completion:nil];
+    }
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    MPMediaQuery *query = [MPMediaQuery songsQuery];
-    NSArray *arrayOfSongs = [query.items subarrayWithRange:NSMakeRange(0,30)];
-    
-    //multithread here
-    for(MPMediaItem *song in arrayOfSongs)
-    {
-        NSLog(@"%@",[song valueForProperty:MPMediaItemPropertyTitle]);
-        //[self getBeatsPerMinute:song];
-    }
+    [self getSongs];
     //[self startStandardUpdates];
+    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    /*MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:@"3120552662911860905" forProperty:MPMediaItemPropertyPersistentID];
+    MPMediaQuery *mySongQuery = [[MPMediaQuery alloc] init];
+    [mySongQuery addFilterPredicate: predicate];
+    [self.musicPlayer setQueueWithQuery:mySongQuery];
+    [self.musicPlayer play];*/
 }
 
 -(void)viewWillAppear:(BOOL)animated{
