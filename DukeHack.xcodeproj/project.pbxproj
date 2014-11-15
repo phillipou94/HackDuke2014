@@ -25,6 +25,8 @@
 		4D7AF8C11A170C7D00DB5B66 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */; };
 		4D85AF711A17A379002E4C0D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85AF701A17A379002E4C0D /* CoreMedia.framework */; };
 		62518C791A17769E00CBBCE2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62518C781A17769E00CBBCE2 /* CoreLocation.framework */; };
+		62518C7C1A17B3B600CBBCE2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62518C7B1A17B3B600CBBCE2 /* MapViewController.m */; };
+		62518C7F1A17B69700CBBCE2 /* AppCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 62518C7E1A17B69700CBBCE2 /* AppCommunication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,10 @@
 		4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		4D85AF701A17A379002E4C0D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		62518C781A17769E00CBBCE2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		62518C7A1A17B3B600CBBCE2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		62518C7B1A17B3B600CBBCE2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		62518C7D1A17B69700CBBCE2 /* AppCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCommunication.h; sourceTree = "<group>"; };
+		62518C7E1A17B69700CBBCE2 /* AppCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCommunication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,10 @@
 		4D68B94E1A16AD39003285E4 /* DukeHack */ = {
 			isa = PBXGroup;
 			children = (
+				62518C7D1A17B69700CBBCE2 /* AppCommunication.h */,
+				62518C7E1A17B69700CBBCE2 /* AppCommunication.m */,
+				62518C7A1A17B3B600CBBCE2 /* MapViewController.h */,
+				62518C7B1A17B3B600CBBCE2 /* MapViewController.m */,
 				4D68B9531A16AD39003285E4 /* AppDelegate.h */,
 				4D68B9541A16AD3A003285E4 /* AppDelegate.m */,
 				4D7AF8BF1A170C7D00DB5B66 /* LoadingViewController.h */,
@@ -222,10 +232,11 @@
 				TargetAttributes = {
 					4D68B94B1A16AD39003285E4 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = F6J9Z7FPQB;
+						DevelopmentTeam = 8V8HUCA3M9;
 					};
 					4D68B9671A16AD3C003285E4 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 8V8HUCA3M9;
 						TestTargetID = 4D68B94B1A16AD39003285E4;
 					};
 				};
@@ -275,8 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D68B9551A16AD3A003285E4 /* AppDelegate.m in Sources */,
+				62518C7F1A17B69700CBBCE2 /* AppCommunication.m in Sources */,
 				4D68B9581A16AD3A003285E4 /* DukeHack.xcdatamodeld in Sources */,
 				4D7AF8C11A170C7D00DB5B66 /* LoadingViewController.m in Sources */,
+				62518C7C1A17B3B600CBBCE2 /* MapViewController.m in Sources */,
 				4D4E3F591A1730E100DB1F56 /* MainViewController.m in Sources */,
 				4D68B9521A16AD39003285E4 /* main.m in Sources */,
 			);

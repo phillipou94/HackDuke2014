@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Phillip Ou. All rights reserved.
 //
 
+
 #import "LoadingViewController.h"
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -21,7 +22,6 @@
     //get all songs in your itunes
     //[self getSongsFromPhone];
 
-    
 }
 
 -(void)getSongsFromPhone
