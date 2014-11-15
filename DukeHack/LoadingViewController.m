@@ -1,27 +1,27 @@
 //
-//  ViewController.m
+//  LoadingViewController.m
 //  DukeHack
 //
 //  Created by Phillip Ou on 11/14/14.
 //  Copyright (c) 2014 Phillip Ou. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LoadingViewController.h"
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface ViewController () <MPMediaPickerControllerDelegate>
+@interface LoadingViewController ()
 
 @end
 
-@implementation ViewController
+@implementation LoadingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //get all songs in your itunes
     [self getSongsFromPhone];
     
-
+    
 }
 
 -(void)getSongsFromPhone
@@ -39,7 +39,9 @@
 -(void) getBeatsPerMinute:(MPMediaItem*)song
 {
     NSString *artistName = [song valueForProperty: MPMediaItemPropertyArtist];
+    artistName = [artistName stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
     NSString *songName = [song valueForProperty:MPMediaItemPropertyTitle];
+    songName = [songName stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
     NSString *searchTerm = [NSString stringWithFormat:@"http://developer.echonest.com/api/v4/song/search?api_key=QVB3INMPBCFREX6N6&format=json&results=1&artist=%@&title=%@&bucket=audio_summary",artistName, songName];
     searchTerm =[searchTerm stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     

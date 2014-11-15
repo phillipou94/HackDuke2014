@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B912E41A-124A-41F6-B852-EC0445D52742</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DukeHack</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B049D34BDB6301122AC52E9E8B0694C67EE5DFED</key>
+		<string>github.com:phillipou94/HackDuke2014.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DukeHack.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B049D34BDB6301122AC52E9E8B0694C67EE5DFED</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:phillipou94/HackDuke2014.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B049D34BDB6301122AC52E9E8B0694C67EE5DFED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B049D34BDB6301122AC52E9E8B0694C67EE5DFED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DukeHack</string>
+		</dict>
+	</array>
+</dict>
+</plist>

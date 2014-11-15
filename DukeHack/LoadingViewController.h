@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoadingViewController.h
 //  DukeHack
 //
 //  Created by Phillip Ou on 11/14/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LoadingViewController : UIViewController
 
 @end
-
