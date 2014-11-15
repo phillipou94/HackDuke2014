@@ -11,7 +11,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface LoadingViewController ()
-
+@property (nonatomic,strong) CLLocationManager* locationManager;
 @end
 
 @implementation LoadingViewController
@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //get all songs in your itunes
-    [self getSongsFromPhone];
-    
+    //[self getSongsFromPhone];
+    [self startStandardUpdates];
     
 }
 
@@ -70,6 +70,53 @@
             }
         }
     }
+}
+#pragma GPS
+
+- (void)startStandardUpdates
+{
+    
+    // Create the location manager if this object does not
+    // already have one.
+
+        self.locationManager = [[CLLocationManager alloc] init];
+        [self.locationManager requestAlwaysAuthorization];
+        self.locationManager.delegate = self;
+
+
+    
+    
+    
+   
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    // Set a movement threshold for new events.
+    self.locationManager.distanceFilter = 10; // meters
+    
+    [self.locationManager startUpdatingLocation];
+}
+
+
+- (void) locationManager:(CLLocationManager *)manager
+        didFailWithError:(NSError *)error
+{
+    NSLog(@"Error: %@", error);
+    NSLog(@"Failed to get location!:(");
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *newLocation = [locations lastObject];
+    
+    
+    NSString *latitude, *longitude;
+    
+    latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
+    longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
+
+    
+    
+    
 }
 
 @end
