@@ -26,6 +26,7 @@
     [_mapView setDelegate:self];
     _mapView.showsUserLocation = YES;
     [self createMap];
+    
 }
 -(void)createMap
 {
@@ -42,6 +43,7 @@
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
     }
     [_mapView setVisibleMapRect:zoomRect animated:YES];
+    [self ShowPath];
 }
 
 - (CLLocationCoordinate2D)coordinateWithLocation:(NSDictionary*)location
@@ -57,5 +59,31 @@
     polylineView.lineWidth = 10.0;
     
     return polylineView;
+}
+-(void)ShowPath
+{
+    
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
+    
+    MKCoordinateRegion region = MKCoordinateRegionMake([AppCommunication sharedManager].startPoint, span);
+    
+    [_mapView setRegion:region];
+    
+    [_mapView setCenterCoordinate:[AppCommunication sharedManager].startPoint animated:YES];
+    
+    
+    CLLocationCoordinate2D stepCoordinates[[AppCommunication sharedManager].myAnnotations.count];
+    
+    
+    for(int i = 0;i<[AppCommunication sharedManager].myAnnotations.count;i++)
+    {
+        stepCoordinates[i] = ((MKPointAnnotation*)[AppCommunication sharedManager].myAnnotations[i]).coordinate;
+    }
+    if(_mapView.overlays.count>0)
+    {
+        [self.mapView removeOverlays:self.mapView.overlays];
+    }
+    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:stepCoordinates count:[AppCommunication sharedManager].myAnnotations.count];
+    [_mapView addOverlay:polyLine];
 }
 @end
