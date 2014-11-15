@@ -5,6 +5,7 @@
 //  Created by Phillip Ou on 11/14/14.
 //  Copyright (c) 2014 Phillip Ou. All rights reserved.
 //
+#define MY_COVERSION 78.7401574806
 
 #import "MainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -12,6 +13,8 @@
 #import "AppDelegate.h"
 #import "SongDictionary.h"
 #import "LoadingViewController.h"
+#import <MapKit/MapKit.h>
+#import "AppCommunication.h"
 
 @interface MainViewController ()
 
@@ -32,26 +35,36 @@
 
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) CLLocation* prevLocation;
+@property (nonatomic,assign) float prevSeconds;
+@property (nonatomic,assign) float timeLapse;
+
 @end
 
 @implementation MainViewController{
-    NSInteger seconds;
+    float seconds;
+    int annotationNum;
+    bool updatedRecently;
 }
+
 
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"SongDictionary" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:nil];
-    self.songDic=[fetchedObjects objectAtIndex:0];
-    NSLog(@"retrieved:%@",self.songDic.mapOfTempos);
-    LoadingViewController *loadView = [[LoadingViewController alloc] initWithNibName:@"LoadingViewController" bundle:nil];
-    if([self.songDic.mapOfTempos allKeys]<0){
-        [self presentViewController: loadView animated:NO completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *ivc = [storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+    [(LoadingViewController*)self presentViewController:ivc animated:NO completion:nil];
+    if([fetchedObjects count]<1){
+        [self presentViewController: ivc animated:NO completion:nil];
+    }
+    else{
+        NSLog(@"%@",fetchedObjects);
+        self.songDic=[fetchedObjects objectAtIndex:0];
+        NSLog(@"retrieved:%@",self.songDic.mapOfTempos);
     }
     
     
@@ -59,14 +72,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    annotationNum = 0;
+    self.milesLabel.text = @"0.0";
+    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
     [self getSongs];
     //[self startStandardUpdates];
     self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-    /*MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:@"3120552662911860905" forProperty:MPMediaItemPropertyPersistentID];
-    MPMediaQuery *mySongQuery = [[MPMediaQuery alloc] init];
-    [mySongQuery addFilterPredicate: predicate];
-    [self.musicPlayer setQueueWithQuery:mySongQuery];
-    [self.musicPlayer play];*/
+
+
+    [self startStandardUpdates];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -92,9 +107,9 @@
     
     // Set a movement threshold for new events.
 
-    self.locationManager.distanceFilter = .1; // meters
+    self.locationManager.distanceFilter = .01; // meters
     
-    [self.locationManager startUpdatingLocation];
+
 }
 
 
@@ -107,24 +122,50 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
         NSLog(@"updatedLocation");
-    CLLocation *newLocation = [locations lastObject];
-    if(self.prevLocation!=nil)
+    if(!updatedRecently)
     {
-        CLLocationDistance distanceChange = [newLocation distanceFromLocation:self.prevLocation];
-        NSLog(@"%f",distanceChange);
+        updatedRecently = true;
+        
+        CLLocation *newLocation = [locations lastObject];
+        
+        CLLocationDistance distanceChange = 0.0;
+        if(self.prevLocation!=nil)
+        {
+            distanceChange = [newLocation distanceFromLocation:self.prevLocation];
+            self.milesLabel.text = [NSString stringWithFormat:@"%f",(self.milesLabel.text.doubleValue+distanceChange)];
+
+        }
+        
+        
+        
+        if(self.timeLapse&&self.prevLocation!=nil)
+        {
+            
+            double speed = distanceChange/self.timeLapse;
+            NSLog(@"sec:%f",self.timeLapse);
+            NSLog(@"speed:%f",speed);
+            MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+            point.coordinate = newLocation.coordinate;
+            annotationNum++;
+            point.title = [NSString stringWithFormat: @"%d",annotationNum];
+            point.subtitle = [NSString stringWithFormat: @"speed:%f",speed];
+            [[AppCommunication sharedManager].myAnnotations addObject:point];
+            self.bpmLabel.text = [NSString stringWithFormat:@"%f",(speed*MY_COVERSION)];
+        }
+        self.prevLocation = newLocation;
+        
+        
+        
+        NSString *latitude, *longitude;
+        
+        latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
+        longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
+        //    NSLog(@"%@",latitude);
+        //    NSLog(@"%@",longitude);
+        
+
+
     }
-    self.prevLocation = newLocation;
-
-
-    
-    NSString *latitude, *longitude;
-    
-    latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
-    longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-//    NSLog(@"%@",latitude);
-//    NSLog(@"%@",longitude);
-    
-    NSLog(@"%f",newLocation.speed);
 }
 
 #pragma mark - Buttons
@@ -148,7 +189,7 @@
         self.beginButton.selected=YES;
         seconds=0;
         if (!self.timer) {
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01f
                                                       target:self
                                                     selector:@selector(timerFired:)
                                                     userInfo:nil
@@ -156,6 +197,7 @@
         }
         
     }
+        [self.locationManager startUpdatingLocation];
 }
 - (IBAction)resumePressed:(id)sender
 {
@@ -164,7 +206,7 @@
     self.resumeButton.hidden=YES;
     self.doneButton.hidden=YES;
     if (!self.timer) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01f
                                                       target:self
                                                     selector:@selector(timerFired:)
                                                     userInfo:nil
@@ -181,8 +223,13 @@
 }
 
 - (void)timerFired:(NSTimer *)timer {
-    
-    seconds+=1;
+    if(seconds-self.prevSeconds>10.0)
+    {
+        self.timeLapse = seconds - self.prevSeconds;
+        self.prevSeconds = seconds;
+        updatedRecently = false;
+    }
+    seconds+=.01;
     NSInteger minutes = (seconds/60);
     NSInteger seconds_converted = (seconds -minutes *60);
     //NSString *secondsString = seconds;
@@ -193,7 +240,7 @@
         self.timeLabel.text = [NSString stringWithFormat:@"%d:%d",minutes,seconds_converted];
     }
 
-    
+
 }
 
 @end
