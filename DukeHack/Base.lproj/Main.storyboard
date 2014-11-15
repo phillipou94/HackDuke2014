@@ -170,7 +170,7 @@
                                     <constraint firstItem="VLs-U1-cLT" firstAttribute="top" secondItem="1QX-KO-EGi" secondAttribute="top" constant="54" id="yxp-KP-GPN"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-rH-R6r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Feet:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-rH-R6r">
                                 <rect key="frame" x="16" y="486" width="46" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -254,6 +254,7 @@
                         <outlet property="bpmLabel" destination="saX-oV-0jf" id="f45-sW-Bcy"/>
                         <outlet property="doneButton" destination="lvd-HY-Fqw" id="bJM-U4-Cey"/>
                         <outlet property="milesLabel" destination="00f-uH-Jju" id="Z3Y-X9-rrU"/>
+                        <outlet property="milesMetricLabel" destination="LAf-rH-R6r" id="LBF-zU-HWM"/>
                         <outlet property="resumeButton" destination="mw2-cg-jkd" id="REP-7g-YD1"/>
                         <outlet property="songTitleLabel" destination="fD8-PQ-BBZ" id="7mc-HM-fnn"/>
                         <outlet property="timeLabel" destination="XDs-y3-1F4" id="xBe-yY-fBG"/>
