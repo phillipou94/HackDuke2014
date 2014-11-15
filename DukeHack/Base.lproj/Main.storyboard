@@ -121,10 +121,16 @@
                                             <color key="titleColor" red="0.88128021410000001" green="0.88128021410000001" blue="0.88128021410000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="previousPressed:" destination="nNN-kJ-XqB" eventType="touchUpInside" id="6iA-zz-F05"/>
+                                        </connections>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PmW-42-hp5">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.75" minValue="0.5" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PmW-42-hp5">
                                         <rect key="frame" x="16" y="100" width="512" height="31"/>
                                         <color key="minimumTrackTintColor" red="0.20784313730000001" green="0.20784313730000001" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="sliderValueChanged:" destination="nNN-kJ-XqB" eventType="valueChanged" id="9be-gs-9Cs"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD8-PQ-BBZ">
                                         <rect key="frame" x="121" y="40" width="305" height="21"/>
@@ -138,6 +144,9 @@
                                             <color key="titleColor" red="0.88128021410000001" green="0.88128021410000001" blue="0.88128021410000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextPressed:" destination="nNN-kJ-XqB" eventType="touchUpInside" id="TlK-gD-SZl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -286,24 +295,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ik-fV-zfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407" y="2400"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="UIH-8g-wDS">
-            <objects>
-                <viewController id="GRg-Fw-oba" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4dE-RV-aLZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="f5y-9j-a6L"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="30V-XU-yh0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="15A-ua-WqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2271" y="2109"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dqa-tr-2EC">
