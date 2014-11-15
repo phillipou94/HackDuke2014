@@ -10,6 +10,7 @@
 
 @interface MainViewController ()
 @property (nonatomic,strong) CLLocationManager* locationManager;
+@property (nonatomic, strong) CLLocation* prevLocation;
 @end
 
 @implementation MainViewController
@@ -55,7 +56,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     // Set a movement threshold for new events.
-    self.locationManager.distanceFilter = 10; // meters
+    self.locationManager.distanceFilter = .1; // meters
     
     [self.locationManager startUpdatingLocation];
 }
@@ -69,19 +70,29 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
+        NSLog(@"updatedLocation");
     CLLocation *newLocation = [locations lastObject];
-    
+    if(self.prevLocation!=nil)
+    {
+        CLLocationDistance distanceChange = [newLocation distanceFromLocation:self.prevLocation];
+        NSLog(@"%f",distanceChange);
+    }
+    self.prevLocation = newLocation;
+
+
     
     NSString *latitude, *longitude;
     
     latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
     longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-    
-    
+//    NSLog(@"%@",latitude);
+//    NSLog(@"%@",longitude);
     
     
     
 }
-
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    
+}
 @end
