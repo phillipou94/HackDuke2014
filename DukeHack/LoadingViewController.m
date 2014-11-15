@@ -91,7 +91,7 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     // Set a movement threshold for new events.
-    self.locationManager.distanceFilter = 10; // meters
+    self.locationManager.distanceFilter = 1.0; // meters
     
     [self.locationManager startUpdatingLocation];
 }
@@ -113,7 +113,6 @@
     
     latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
     longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-
     
     
     
