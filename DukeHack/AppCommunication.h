@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface AppCommunication : NSObject
 + (instancetype)sharedManager;
 @property (nonatomic,strong) NSMutableArray* myAnnotations;
+@property (nonatomic,assign) CLLocationCoordinate2D startPoint;
 @end

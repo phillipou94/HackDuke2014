@@ -155,6 +155,7 @@
             NSLog(@"speed:%f",speed);
             MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
             point.coordinate = newLocation.coordinate;
+            [AppCommunication sharedManager].startPoint = point.coordinate;
             annotationNum++;
             point.title = [NSString stringWithFormat: @"%d",annotationNum];
             point.subtitle = [NSString stringWithFormat: @"speed:%f",speed];
