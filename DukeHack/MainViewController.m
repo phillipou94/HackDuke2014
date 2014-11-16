@@ -19,6 +19,7 @@
 #import <MapKit/MapKit.h>
 #import "AppCommunication.h"
 #import "PulsingHaloLayer.h"
+#import <math.h>
 //#include "PolynomialRegression.h"
 
 @interface MainViewController ()
@@ -46,6 +47,7 @@
 @property (nonatomic, assign) float currentState;
 @property (nonatomic, assign) float previousState;
 @property (nonatomic, assign) float liveState;
+@property (nonatomic, strong) NSMutableArray* totalAnnotations;
 @end
 
 @implementation MainViewController{
@@ -67,7 +69,6 @@ struct myResult quadReg(int n,double x[],double y[])
     float sumx, sumxsq, sumy, sumxy;
     float sumx3, sumx4, sumxsqy, a[20][20], u=0.0, b[20];
     
-    // Scanf(%d, &n);
     sumx = 0;
     sumxsq = 0;
     sumy = 0;
@@ -77,7 +78,6 @@ struct myResult quadReg(int n,double x[],double y[])
     sumxsqy = 0;
     for(i=0;  i<n; i++)
     {
-        //Scanf(%f %f, &x, &y);
         sumx +=x[i];
         sumxsq += pow(x[i],2);
         sumx3 += pow(x[i],3);
@@ -123,15 +123,19 @@ struct myResult quadReg(int n,double x[],double y[])
     temp.c = b[0];
     return temp;
 }
-
--(void)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayX withY:(NSMutableArray*)arrayY
+-(double)functionateWithCoeffA:(double)a WithCoeffB:(double)b WithX:(double)x
+{
+    double temp = 2*a*x+b;
+    return pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp);
+}
+-(void)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayStuff
 {
     double myX[num];
     double myY[num];
-    for(int i = 0; i <arrayX.count;i++)
+    for(int i = 0; i <arrayStuff.count;i++)
     {
-        myX[i] = ((NSNumber*)arrayX[i]).doubleValue;
-        myY[i] = ((NSNumber*)arrayY[i]).doubleValue;
+        myX[i] = ((CLLocation*)arrayStuff[i]).coordinate.latitude;
+        myY[i] = ((CLLocation*)arrayStuff[i]).coordinate.longitude;
     }
     struct myResult res = quadReg(num, myX, myY);
     NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
@@ -164,10 +168,10 @@ struct myResult quadReg(int n,double x[],double y[])
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.totalAnnotations = [NSMutableArray array];
     NSMutableArray* xArray = [NSMutableArray arrayWithObjects:@(-4.0), @(-3.0),@(-2.0),@(-1.0),@(0.0),@(1.0),@(2.0),@(3.0),@(4.0),@(5.0),nil];
     NSMutableArray* yArray = [NSMutableArray arrayWithObjects:@(21.0),@(12.0),@(4.0),@(1.0),@(2.0),@(7.0),@(15.0),@(30.0),@(45.0),@(67.0), nil];
     int count = xArray.count;
-    [self calcQuadRegWithElemets:count withX:xArray withY:yArray];
     
 //    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
 //    [self.view addSubview: volumeView];
@@ -223,7 +227,7 @@ struct myResult quadReg(int n,double x[],double y[])
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
+
     NSLog(@"updatedLocation");
     numberOfTimesUpdated++;
     if(!updatedRecently)
@@ -231,7 +235,7 @@ struct myResult quadReg(int n,double x[],double y[])
         updatedRecently = true;
         
         CLLocation *newLocation = [locations lastObject];
-        
+        [self.totalAnnotations addObject:newLocation];
         CLLocationDistance distanceChange = 0;
         if(self.prevLocation!=nil)
         {
