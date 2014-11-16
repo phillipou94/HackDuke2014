@@ -132,11 +132,6 @@ struct myResult quadReg(int n,double x[],double y[])
     temp.c = b[0];
     return temp;
 }
--(double)functionateWithCoeffA:(double)a WithCoeffB:(double)b WithX:(double)x
-{
-    double temp = 2*a*x+b;
-    return (pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp))/(4*a);
-}
 -(void)calcQuadRegWithElemets:(int) num withT:(NSMutableArray*)arrayT withXY:(NSMutableArray*)arrayXY do:(NSString*)str
 {
     double myX[num];
@@ -157,18 +152,6 @@ struct myResult quadReg(int n,double x[],double y[])
         coefC = res.a;
         coefD = res.b;
     }
-//    NSLog(@"%ft^2+%ft+%f",res.a,res.b,res.c);
-//    if(res.a>0.0||res.a<0.0)
-//    {
-//        double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((NSNumber*)arrayT[arrayT.count-1]).doubleValue]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((NSNumber*)arrayT[0]).doubleValue];
-//        NSLog(@"distance:%f",distance);
-//        return distance;
-//    }
-//    else
-//    {
-//        return [current distanceFromLocation:self.prevLocation];
-//    }
-    
 }
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -198,11 +181,6 @@ struct myResult quadReg(int n,double x[],double y[])
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    coefA = -0.160554;
-//    coefB = 1.109893;
-//    coefC = -0.160731;
-//    coefD = 0.615759;
-//    double arcLength = [self integralWithT:10.000001 WithA:coefA WithB:coefB WithC:coefC WithD:coefD]- [self integralWithT:0.0 WithA:coefA WithB:coefB WithC:coefC WithD:coefD];
 
     time = 0.0;
     self.totalAnnotations = [NSMutableArray array];
@@ -272,7 +250,6 @@ struct myResult quadReg(int n,double x[],double y[])
     current = newLocation;
     
     [self.totalAnnotations addObject:newLocation];
-    //NSLog(@"%f",[newLocation distanceFromLocation:self.prevLocation]);
     if(self.fixedX.count==0)
     {
         [self.fixedX addObject:@(0.0)];
@@ -347,26 +324,26 @@ struct myResult quadReg(int n,double x[],double y[])
                 else if(self.totalAnnotations.count==2)
                 {
                     arcLength = [newLocation distanceFromLocation:self.prevLocation];
-                    NSLog(@"Only two loc");
+                    //only 2 points to use so linear
                 }
                 else
                 {
-                    NSLog(@"No Change");
+                    NSLog(@"No Noticible movement");
                 }
-                
-                double speed1 = distanceChange/time;
+            
                 double speed = arcLength/time;
-                NSLog(@"sec:%f",self.timeLapse);
-                NSLog(@"speed:%f",speed*MY_COVERSION);
-                NSLog(@"oldspeed:%f",speed1*MY_COVERSION);
+                //speed in meters/sec
+            
                 MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
                 point.coordinate = newLocation.coordinate;
                 [AppCommunication sharedManager].startPoint = point.coordinate;
                 annotationNum++;
                 point.title = [NSString stringWithFormat: @"%d",annotationNum];
-                point.subtitle = [NSString stringWithFormat: @"speed:%f",speed];
+                point.subtitle = [NSString stringWithFormat: @"bpm:%f",(speed*MY_COVERSION)];
                 [[AppCommunication sharedManager].myAnnotations addObject:point];
+            
                 self.bpmLabel.text = [NSString stringWithFormat:@"%f",(speed*MY_COVERSION)];
+            
                 CGFloat roundingValue = 50.0; //round to nearest 50
                 self.liveState= ceilf(speed / roundingValue)*50;
                 NSLog(@"nice:%f",(self.liveState)/60);
@@ -406,7 +383,7 @@ struct myResult quadReg(int n,double x[],double y[])
             self.fixedY = [NSMutableArray array];
             self.timeStamp = [NSMutableArray array];
             time = 0.0;
-            
+            //resets everything
             
             
             
