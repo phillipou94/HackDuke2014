@@ -24,7 +24,10 @@
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
-
+@property (strong, nonatomic) IBOutlet UILabel *unitLabel;
+@property (strong, nonatomic) IBOutlet UIView *upperView;
+@property (strong, nonatomic) IBOutlet UIView *songView;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UILabel *bpmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *songTitleLabel;
@@ -35,6 +38,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *resumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) IBOutlet UIButton *beginButton;
+@property (strong, nonatomic) IBOutlet UIButton *prevButton;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSTimer *animationTimer;
 @property (strong, nonatomic) MPMusicPlayerController *musicPlayer;
@@ -48,9 +53,13 @@
 @property (nonatomic, assign) float previousState;
 @property (nonatomic, assign) float liveState;
 @property (nonatomic, strong) NSMutableArray* totalAnnotations;
+
+@property (nonatomic, strong) PulsingHaloLayer *halo;
+
 @property (nonatomic, strong) NSMutableArray* fixedX;
 @property (nonatomic, strong) NSMutableArray* fixedY;
 @property (nonatomic, strong) NSMutableArray* timeStamp;
+
 @end
 
 @implementation MainViewController{
@@ -62,9 +71,15 @@
     double coefA;
     double coefB;
     double coefC;
+
+    
+    double stepsPerMin;
+    double milesPerHour;
+
     double coefD;
     CLLocation* current;
     double time;
+
 }
 struct myResult
 {
@@ -142,6 +157,7 @@ struct myResult quadReg(int n,double x[],double y[])
         myY[i] = ((NSNumber*)arrayXY[i]).doubleValue;
     }
     struct myResult res = quadReg(num, myX, myY);
+
     if([str isEqual:@"x"])
     {
         coefA = res.a;
@@ -152,6 +168,7 @@ struct myResult quadReg(int n,double x[],double y[])
         coefC = res.a;
         coefD = res.b;
     }
+
 }
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -175,8 +192,9 @@ struct myResult quadReg(int n,double x[],double y[])
         NSLog(@"retrieved:%@",self.songDic.mapOfTempos);
     }
     
-    
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -201,13 +219,39 @@ struct myResult quadReg(int n,double x[],double y[])
     //[self startStandardUpdates];
     self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
     [self startStandardUpdates];
+    self.unitLabel.tag=0;
+    self.bpmLabel.tag=0;
+        
 
 }
+- (IBAction)labelTapped:(id)sender {
+    NSLog(@"tapped");
+    if(self.unitLabel.tag==0){
+        self.unitLabel.text = @"Miles Per Hour";
+        self.unitLabel.tag=1;
+        self.bpmLabel.tag=1;
+        self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(milesPerHour)];
+    } else {
+        self.unitLabel.text = @"Steps Per Minute";
+        self.unitLabel.tag=0;
+        self.bpmLabel.tag=0;
+        self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(stepsPerMin*MY_COVERSION)];
+    }
+    
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.doneButton.hidden=YES;
     self.resumeButton.hidden=YES;
+    //self.nextButton.hidden=YES;
+    //self.prevButton.hidden=YES;
+    //self.songView.hidden=YES;
+    
+    
+    
 }
 
 #pragma GPS
@@ -288,7 +332,7 @@ struct myResult quadReg(int n,double x[],double y[])
             distanceChange = [newLocation distanceFromLocation:self.prevLocation];
             if(usingMiles)
             {
-                self.milesLabel.text = [NSString stringWithFormat:@"%f",(self.milesLabel.text.doubleValue+distanceChange*MY_COVERSION_MILE)];
+                self.milesLabel.text = [NSString stringWithFormat:@"%.2f",(self.milesLabel.text.doubleValue+distanceChange*MY_COVERSION_MILE)];
             }
             else
             {
@@ -298,15 +342,12 @@ struct myResult quadReg(int n,double x[],double y[])
                     usingMiles=true;
                     self.milesMetricLabel.text = @"Miles:";
                     double temp = 0.0 + self.milesLabel.text.intValue;
-                    self.milesLabel.text = [NSString stringWithFormat:@"%f",(temp*FEET_TO_MILES)];
+                    self.milesLabel.text = [NSString stringWithFormat:@"%.2f",(temp*FEET_TO_MILES)];
                 }
                 
             }
-            
-            
-            
 
-                double traveledDist;
+            double traveledDist;
             double arcLength;
                 if(self.fixedX.count>2)
                 {
@@ -342,7 +383,7 @@ struct myResult quadReg(int n,double x[],double y[])
                 point.subtitle = [NSString stringWithFormat: @"bpm:%f",(speed*MY_COVERSION)];
                 [[AppCommunication sharedManager].myAnnotations addObject:point];
             
-                self.bpmLabel.text = [NSString stringWithFormat:@"%f",(speed*MY_COVERSION)];
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(speed*MY_COVERSION)];
             
                 CGFloat roundingValue = 50.0; //round to nearest 50
                 self.liveState= ceilf(speed / roundingValue)*50;
@@ -357,7 +398,7 @@ struct myResult quadReg(int n,double x[],double y[])
                     self.currentState=self.liveState;
                     NSLog(@"currentSTate:%f",self.currentState);
                 }
-                if(self.previousState==self.currentState)
+                if(self.previousState==self.currentState ||self.liveState==0)
                 {
                     //do nothing
                     NSLog(@"do nothing");
@@ -365,8 +406,9 @@ struct myResult quadReg(int n,double x[],double y[])
                     //change playlist
                     if(self.liveState>150.000000){
                         [self playPlaylistForState:@"150.000000"];
-                    }else{
+                    } else{
                         NSString *stateString = [NSString stringWithFormat:@"%f",self.liveState];
+                        NSLog(@"stateSTring:%@",stateString);
                         [self playPlaylistForState:stateString];
                     }
                     NSLog(@"change playlist");
@@ -424,24 +466,36 @@ struct myResult quadReg(int n,double x[],double y[])
 #pragma mark - Buttons
 
 - (IBAction)beginPressed:(id)sender {
-    [self pulse];
+    
+    //pause
     if(self.beginButton.selected)
     {
         [self.musicPlayer pause];
+        [self.halo removeAllAnimations];
         self.beginButton.selected=NO;
         self.doneButton.hidden=NO;
         self.resumeButton.hidden=NO;
+        self.prevButton.hidden=YES;
+        self.nextButton.hidden=YES;
         self.beginButton.hidden=YES;
+        
         
         if ([self.timer isValid]) {
             [self.timer invalidate];
         }
         self.timer = nil;
         
+       
+        
+        
     } else
     {
+        [self pulse];
+       // [self buttonPulse:[self.beginButton center]];
         [self playPlaylistForState:@"50.000000"];
         self.beginButton.selected=YES;
+        self.nextButton.hidden=NO;
+        self.prevButton.hidden=NO;
         seconds=0;
         if (!self.timer) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01f
@@ -487,6 +541,7 @@ struct myResult quadReg(int n,double x[],double y[])
     self.beginButton.selected=NO;
     [self.musicPlayer pause];
     self.animationTimer=nil;
+    [self.halo removeAllAnimations];
 }
 
 - (void)timerFired:(NSTimer *)timer
@@ -511,6 +566,10 @@ struct myResult quadReg(int n,double x[],double y[])
 
 
 }
+- (IBAction)previousPressed:(id)sender {
+    
+    
+}
 - (IBAction)nextPressed:(id)sender {
     __block NSString *stateString=@"";
     if(numberOfTimesUpdated%2==0)
@@ -529,6 +588,7 @@ struct myResult quadReg(int n,double x[],double y[])
     NSLog(@"pressed:%@",stateString);
     if(!self.beginButton.selected){
         [self.musicPlayer pause];
+        
     }
 }
 
@@ -543,17 +603,34 @@ struct myResult quadReg(int n,double x[],double y[])
 }
 -(void)pulse
 {
-    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
-    halo.position = self.view.center;
+    self.halo = [PulsingHaloLayer layer];
+    self.halo.position = self.view.center;
     UIColor *color = [UIColor colorWithRed:245.0/255.0
                                      green:30.0/255.0
                                       blue:30.0/255.0
                                      alpha:1.0];
     
-    halo.backgroundColor = color.CGColor;
-    halo.radius = 240.0;
+    self.halo.backgroundColor = color.CGColor;
+    self.halo.radius = 240.0;
+    self.halo.pulseInterval=60.0/self.liveState;
+    self.halo.pulseOnce=NO;
+    [self.view.layer addSublayer:self.halo];
     
-    [self.view.layer addSublayer:halo];
+}
+
+-(void)buttonPulse:(CGPoint)point{
+    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
+    halo.position = point;
+    halo.radius = 50;
+    halo.pulseOnce=YES;
+    [self.bottomView.layer addSublayer:halo];
+    UIColor *color = [UIColor colorWithRed:245.0/255.0
+                                     green:30.0/255.0
+                                      blue:30.0/255.0
+                                     alpha:1.0];
+    halo.backgroundColor = color.CGColor;
+    
     
 }
 @end
+

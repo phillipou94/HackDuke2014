@@ -16,5 +16,6 @@
 @property (nonatomic, assign) CGFloat radius;                   // default:60pt
 @property (nonatomic, assign) NSTimeInterval animationDuration; // default:3s
 @property (nonatomic, assign) NSTimeInterval pulseInterval; // default is 0s
+@property (nonatomic, assign) BOOL pulseOnce;
 
 @end

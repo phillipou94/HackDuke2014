@@ -22,10 +22,16 @@
 		4D68B9601A16AD3B003285E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D68B95F1A16AD3B003285E4 /* Images.xcassets */; };
 		4D68B9631A16AD3B003285E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D68B9611A16AD3B003285E4 /* LaunchScreen.xib */; };
 		4D68B96F1A16AD3D003285E4 /* DukeHackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D68B96E1A16AD3D003285E4 /* DukeHackTests.m */; };
+		4D6B461C1A18CD8500320293 /* Media-Play-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D6B461B1A18CD8500320293 /* Media-Play-256.png */; };
+		4D6B461E1A18CDD100320293 /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D6B461D1A18CDD100320293 /* pin.png */; };
+		4D6B46201A18DFB900320293 /* fast-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D6B461F1A18DFB900320293 /* fast-forward.png */; };
+		4D6B46221A18E04500320293 /* rewind.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D6B46211A18E04500320293 /* rewind.png */; };
 		4D7AF8C11A170C7D00DB5B66 /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */; };
 		4D85AF711A17A379002E4C0D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85AF701A17A379002E4C0D /* CoreMedia.framework */; };
 		4D85AF761A17A7EF002E4C0D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D85AF751A17A7EF002E4C0D /* AVFoundation.framework */; };
 		4D9D93E01A17E60A001B5017 /* SongDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9D93DF1A17E60A001B5017 /* SongDictionary.m */; };
+		4DEFBDF81A18E2A900E9F519 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEFBDF71A18E2A900E9F519 /* play.png */; };
+		4DF1B9A11A18E332006C0262 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF1B9A01A18E332006C0262 /* pause.png */; };
 		62518C791A17769E00CBBCE2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62518C781A17769E00CBBCE2 /* CoreLocation.framework */; };
 		62518C7C1A17B3B600CBBCE2 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62518C7B1A17B3B600CBBCE2 /* MapViewController.m */; };
 		62518C7F1A17B69700CBBCE2 /* AppCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 62518C7E1A17B69700CBBCE2 /* AppCommunication.m */; };
@@ -63,12 +69,18 @@
 		4D68B9681A16AD3C003285E4 /* DukeHackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DukeHackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D68B96D1A16AD3C003285E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D68B96E1A16AD3D003285E4 /* DukeHackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DukeHackTests.m; sourceTree = "<group>"; };
+		4D6B461B1A18CD8500320293 /* Media-Play-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Media-Play-256.png"; sourceTree = "<group>"; };
+		4D6B461D1A18CDD100320293 /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		4D6B461F1A18DFB900320293 /* fast-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fast-forward.png"; sourceTree = "<group>"; };
+		4D6B46211A18E04500320293 /* rewind.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rewind.png; sourceTree = "<group>"; };
 		4D7AF8BF1A170C7D00DB5B66 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		4D7AF8C01A170C7D00DB5B66 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		4D85AF701A17A379002E4C0D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4D85AF751A17A7EF002E4C0D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4D9D93DE1A17E60A001B5017 /* SongDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongDictionary.h; sourceTree = "<group>"; };
 		4D9D93DF1A17E60A001B5017 /* SongDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongDictionary.m; sourceTree = "<group>"; };
+		4DEFBDF71A18E2A900E9F519 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		4DF1B9A01A18E332006C0262 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		62518C781A17769E00CBBCE2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62518C7A1A17B3B600CBBCE2 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		62518C7B1A17B3B600CBBCE2 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -161,6 +173,12 @@
 				4D4E3F581A1730E100DB1F56 /* MainViewController.m */,
 				4D9D93DE1A17E60A001B5017 /* SongDictionary.h */,
 				4D9D93DF1A17E60A001B5017 /* SongDictionary.m */,
+				4D6B461B1A18CD8500320293 /* Media-Play-256.png */,
+				4DF1B9A01A18E332006C0262 /* pause.png */,
+				4D6B46211A18E04500320293 /* rewind.png */,
+				4DEFBDF71A18E2A900E9F519 /* play.png */,
+				4D6B461D1A18CDD100320293 /* pin.png */,
+				4D6B461F1A18DFB900320293 /* fast-forward.png */,
 				4D68B95F1A16AD3B003285E4 /* Images.xcassets */,
 				4D68B9611A16AD3B003285E4 /* LaunchScreen.xib */,
 				4D68B9561A16AD3A003285E4 /* DukeHack.xcdatamodeld */,
@@ -255,11 +273,11 @@
 				TargetAttributes = {
 					4D68B94B1A16AD39003285E4 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 8V8HUCA3M9;
+						DevelopmentTeam = F6J9Z7FPQB;
 					};
 					4D68B9671A16AD3C003285E4 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 8V8HUCA3M9;
+						DevelopmentTeam = F6J9Z7FPQB;
 						TestTargetID = 4D68B94B1A16AD39003285E4;
 					};
 				};
@@ -289,7 +307,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D68B95E1A16AD3B003285E4 /* Main.storyboard in Resources */,
+				4DEFBDF81A18E2A900E9F519 /* play.png in Resources */,
+				4D6B46201A18DFB900320293 /* fast-forward.png in Resources */,
+				4D6B46221A18E04500320293 /* rewind.png in Resources */,
 				4D68B9631A16AD3B003285E4 /* LaunchScreen.xib in Resources */,
+				4DF1B9A11A18E332006C0262 /* pause.png in Resources */,
+				4D6B461C1A18CD8500320293 /* Media-Play-256.png in Resources */,
+				4D6B461E1A18CDD100320293 /* pin.png in Resources */,
 				4D68B9601A16AD3B003285E4 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

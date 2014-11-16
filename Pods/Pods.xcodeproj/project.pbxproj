@@ -1,993 +1,474 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>056E829AECFF2C9041DC0813</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-DukeHack-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0E275D54DB3C58C2AD0D07B0</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4556F36570DDF3755557AF60</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-DukeHack-PulsingHalo/Pods-DukeHack-PulsingHalo-prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>10B60A3E9BB50C5875E6FBD2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>A519EB05241DDA7EB7284240</string>
-				<string>66CA299A56A1F532E6A528B7</string>
-				<string>B621052DD64EB9D6103AF0F5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>PulsingHalo</string>
-			<key>path</key>
-			<string>PulsingHalo</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1337FCA86D39A4ED69BDC540</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>A48E9898E0DD5D53B9B091BF</string>
-				<string>53B9294180570B512A0154AE</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>13CB10673525B5E5C02C56B8</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>71958E37EF2FBEC90EF523DA</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>17BAACF580C51525E4B653C3</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D6291C735BFC2224D7AFB4B2</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>184B9D3E0CEF53178917E845</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-DukeHack-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>29E2F61F921670CC53320E0D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A519EB05241DDA7EB7284240</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>34874F500C39356F3DE38397</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-DukeHack.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>3AA14C7FA6526EB374B77F5C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>34874F500C39356F3DE38397</string>
-				<string>63EA22781A24B929031FD285</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3CDDBAEA965585B1C53D9431</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-DukeHack-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>43E054CDA809E36D927939D0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B076B6016F4D6DEF2F6EC670</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4556F36570DDF3755557AF60</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-DukeHack-PulsingHalo-Private.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>46E53E6B73110A79455398AD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-DukeHack-environment.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4A3A5B1DF9E803AA13C6EE3A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-DukeHack-PulsingHalo-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4AD3E608CC72F8F2CBA78087</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3CDDBAEA965585B1C53D9431</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>53B9294180570B512A0154AE</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>NO</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>RELEASE=1</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>60CFD7B6008478F6D13842C0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B076B6016F4D6DEF2F6EC670</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>61F051CA63F53D7D45B95763</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-DukeHack.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>62213494F7E8153AB880A634</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>B076B6016F4D6DEF2F6EC670</string>
-				<string>A659478BA2DE5A0E3A25A0EB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>63EA22781A24B929031FD285</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-DukeHack-PulsingHalo.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>66CA299A56A1F532E6A528B7</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>PulsingHaloLayer.m</string>
-			<key>path</key>
-			<string>PulsingHalo/PulsingHaloLayer.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6D7B1E64C1B4F064FB2F9203</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>77FFACA33C945C88125512F5</string>
-				<string>ECC30A347B46112FEB2C17FC</string>
-				<string>C2B46350ADA2D0744167DCA7</string>
-				<string>3AA14C7FA6526EB374B77F5C</string>
-				<string>13CB10673525B5E5C02C56B8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>71958E37EF2FBEC90EF523DA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AE78A52722AB6E0EA143ED21</string>
-				<string>184B9D3E0CEF53178917E845</string>
-				<string>3CDDBAEA965585B1C53D9431</string>
-				<string>46E53E6B73110A79455398AD</string>
-				<string>056E829AECFF2C9041DC0813</string>
-				<string>61F051CA63F53D7D45B95763</string>
-				<string>D6291C735BFC2224D7AFB4B2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-DukeHack</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-DukeHack</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7224AC678C45352654832C55</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>0E275D54DB3C58C2AD0D07B0</string>
-				<string>DD720DEDE57F3B88100AFC48</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>771568A708F8DED100EEE767</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>29E2F61F921670CC53320E0D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>77FFACA33C945C88125512F5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>7A3296CC7790B3C16C60EA9C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>7224AC678C45352654832C55</string>
-			<key>buildPhases</key>
-			<array>
-				<string>A36211E0B14745B642D89B72</string>
-				<string>A50B5234FF09E82BA76BCC63</string>
-				<string>771568A708F8DED100EEE767</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-DukeHack-PulsingHalo</string>
-			<key>productName</key>
-			<string>Pods-DukeHack-PulsingHalo</string>
-			<key>productReference</key>
-			<string>63EA22781A24B929031FD285</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>7F16363A9DEE4B3421D03DF0</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>4AD3E608CC72F8F2CBA78087</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>96D2141DE60FF69E7E42081C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-DukeHack-PulsingHalo.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A36211E0B14745B642D89B72</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EDD277F8BE6D929C40B13BE8</string>
-				<string>BFEEE11783AA001B1C95B295</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A48E9898E0DD5D53B9B091BF</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>NO</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>A50B5234FF09E82BA76BCC63</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>60CFD7B6008478F6D13842C0</string>
-				<string>C696F1A594D637845FBAB2B7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A519EB05241DDA7EB7284240</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>PulsingHaloLayer.h</string>
-			<key>path</key>
-			<string>PulsingHalo/PulsingHaloLayer.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A659478BA2DE5A0E3A25A0EB</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuartzCore.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>AC4518FBADE448205C694157</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>F38CF1F26C79109A97E96767</string>
-				<string>17BAACF580C51525E4B653C3</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>AE78A52722AB6E0EA143ED21</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-DukeHack-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AEE3A4F466F31FE2592DA973</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0510</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>1337FCA86D39A4ED69BDC540</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>6D7B1E64C1B4F064FB2F9203</string>
-			<key>productRefGroup</key>
-			<string>3AA14C7FA6526EB374B77F5C</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>B3783A2309F612040FEB92AE</string>
-				<string>7A3296CC7790B3C16C60EA9C</string>
-			</array>
-		</dict>
-		<key>B076B6016F4D6DEF2F6EC670</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>B3783A2309F612040FEB92AE</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>AC4518FBADE448205C694157</string>
-			<key>buildPhases</key>
-			<array>
-				<string>7F16363A9DEE4B3421D03DF0</string>
-				<string>D2C9529DB1353077792C95CA</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>DF84510B8C0F54CA2E7287B3</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-DukeHack</string>
-			<key>productName</key>
-			<string>Pods-DukeHack</string>
-			<key>productReference</key>
-			<string>34874F500C39356F3DE38397</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>B621052DD64EB9D6103AF0F5</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>96D2141DE60FF69E7E42081C</string>
-				<string>4556F36570DDF3755557AF60</string>
-				<string>D721DAAAE932F7B24706955F</string>
-				<string>4A3A5B1DF9E803AA13C6EE3A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Pods-DukeHack-PulsingHalo</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BFEEE11783AA001B1C95B295</key>
-		<dict>
-			<key>fileRef</key>
-			<string>66CA299A56A1F532E6A528B7</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc -DOS_OBJECT_USE_OBJC=0</string>
-			</dict>
-		</dict>
-		<key>C2B46350ADA2D0744167DCA7</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>10B60A3E9BB50C5875E6FBD2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C696F1A594D637845FBAB2B7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A659478BA2DE5A0E3A25A0EB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D12C4632C8C1EC2258766EF8</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>AEE3A4F466F31FE2592DA973</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>7A3296CC7790B3C16C60EA9C</string>
-			<key>remoteInfo</key>
-			<string>Pods-DukeHack-PulsingHalo</string>
-		</dict>
-		<key>D2C9529DB1353077792C95CA</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>43E054CDA809E36D927939D0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>D6291C735BFC2224D7AFB4B2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-DukeHack.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D721DAAAE932F7B24706955F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-DukeHack-PulsingHalo-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DD720DEDE57F3B88100AFC48</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4556F36570DDF3755557AF60</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/Pods-DukeHack-PulsingHalo/Pods-DukeHack-PulsingHalo-prefix.pch</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>DF84510B8C0F54CA2E7287B3</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>7A3296CC7790B3C16C60EA9C</string>
-			<key>targetProxy</key>
-			<string>D12C4632C8C1EC2258766EF8</string>
-		</dict>
-		<key>ECC30A347B46112FEB2C17FC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>62213494F7E8153AB880A634</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EDD277F8BE6D929C40B13BE8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D721DAAAE932F7B24706955F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F38CF1F26C79109A97E96767</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>61F051CA63F53D7D45B95763</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.1</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>AEE3A4F466F31FE2592DA973</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29E2F61F921670CC53320E0D /* PulsingHaloLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A519EB05241DDA7EB7284240 /* PulsingHaloLayer.h */; };
+		43E054CDA809E36D927939D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076B6016F4D6DEF2F6EC670 /* Foundation.framework */; };
+		4AD3E608CC72F8F2CBA78087 /* Pods-DukeHack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDDBAEA965585B1C53D9431 /* Pods-DukeHack-dummy.m */; };
+		60CFD7B6008478F6D13842C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B076B6016F4D6DEF2F6EC670 /* Foundation.framework */; };
+		BFEEE11783AA001B1C95B295 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CA299A56A1F532E6A528B7 /* PulsingHaloLayer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		C696F1A594D637845FBAB2B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A659478BA2DE5A0E3A25A0EB /* QuartzCore.framework */; };
+		EDD277F8BE6D929C40B13BE8 /* Pods-DukeHack-PulsingHalo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D721DAAAE932F7B24706955F /* Pods-DukeHack-PulsingHalo-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D12C4632C8C1EC2258766EF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEE3A4F466F31FE2592DA973 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A3296CC7790B3C16C60EA9C;
+			remoteInfo = "Pods-DukeHack-PulsingHalo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		056E829AECFF2C9041DC0813 /* Pods-DukeHack-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-DukeHack-resources.sh"; sourceTree = "<group>"; };
+		184B9D3E0CEF53178917E845 /* Pods-DukeHack-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DukeHack-acknowledgements.plist"; sourceTree = "<group>"; };
+		34874F500C39356F3DE38397 /* libPods-DukeHack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DukeHack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CDDBAEA965585B1C53D9431 /* Pods-DukeHack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DukeHack-dummy.m"; sourceTree = "<group>"; };
+		4556F36570DDF3755557AF60 /* Pods-DukeHack-PulsingHalo-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DukeHack-PulsingHalo-Private.xcconfig"; sourceTree = "<group>"; };
+		46E53E6B73110A79455398AD /* Pods-DukeHack-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DukeHack-environment.h"; sourceTree = "<group>"; };
+		4A3A5B1DF9E803AA13C6EE3A /* Pods-DukeHack-PulsingHalo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DukeHack-PulsingHalo-prefix.pch"; sourceTree = "<group>"; };
+		61F051CA63F53D7D45B95763 /* Pods-DukeHack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DukeHack.debug.xcconfig"; sourceTree = "<group>"; };
+		63EA22781A24B929031FD285 /* libPods-DukeHack-PulsingHalo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DukeHack-PulsingHalo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CA299A56A1F532E6A528B7 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PulsingHaloLayer.m; path = PulsingHalo/PulsingHaloLayer.m; sourceTree = "<group>"; };
+		77FFACA33C945C88125512F5 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96D2141DE60FF69E7E42081C /* Pods-DukeHack-PulsingHalo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DukeHack-PulsingHalo.xcconfig"; sourceTree = "<group>"; };
+		A519EB05241DDA7EB7284240 /* PulsingHaloLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PulsingHaloLayer.h; path = PulsingHalo/PulsingHaloLayer.h; sourceTree = "<group>"; };
+		A659478BA2DE5A0E3A25A0EB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		AE78A52722AB6E0EA143ED21 /* Pods-DukeHack-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DukeHack-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B076B6016F4D6DEF2F6EC670 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D6291C735BFC2224D7AFB4B2 /* Pods-DukeHack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DukeHack.release.xcconfig"; sourceTree = "<group>"; };
+		D721DAAAE932F7B24706955F /* Pods-DukeHack-PulsingHalo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DukeHack-PulsingHalo-dummy.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A50B5234FF09E82BA76BCC63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60CFD7B6008478F6D13842C0 /* Foundation.framework in Frameworks */,
+				C696F1A594D637845FBAB2B7 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C9529DB1353077792C95CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43E054CDA809E36D927939D0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10B60A3E9BB50C5875E6FBD2 /* PulsingHalo */ = {
+			isa = PBXGroup;
+			children = (
+				A519EB05241DDA7EB7284240 /* PulsingHaloLayer.h */,
+				66CA299A56A1F532E6A528B7 /* PulsingHaloLayer.m */,
+				B621052DD64EB9D6103AF0F5 /* Support Files */,
+			);
+			path = PulsingHalo;
+			sourceTree = "<group>";
+		};
+		13CB10673525B5E5C02C56B8 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				71958E37EF2FBEC90EF523DA /* Pods-DukeHack */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		3AA14C7FA6526EB374B77F5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34874F500C39356F3DE38397 /* libPods-DukeHack.a */,
+				63EA22781A24B929031FD285 /* libPods-DukeHack-PulsingHalo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		62213494F7E8153AB880A634 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B076B6016F4D6DEF2F6EC670 /* Foundation.framework */,
+				A659478BA2DE5A0E3A25A0EB /* QuartzCore.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		6D7B1E64C1B4F064FB2F9203 = {
+			isa = PBXGroup;
+			children = (
+				77FFACA33C945C88125512F5 /* Podfile */,
+				ECC30A347B46112FEB2C17FC /* Frameworks */,
+				C2B46350ADA2D0744167DCA7 /* Pods */,
+				3AA14C7FA6526EB374B77F5C /* Products */,
+				13CB10673525B5E5C02C56B8 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		71958E37EF2FBEC90EF523DA /* Pods-DukeHack */ = {
+			isa = PBXGroup;
+			children = (
+				AE78A52722AB6E0EA143ED21 /* Pods-DukeHack-acknowledgements.markdown */,
+				184B9D3E0CEF53178917E845 /* Pods-DukeHack-acknowledgements.plist */,
+				3CDDBAEA965585B1C53D9431 /* Pods-DukeHack-dummy.m */,
+				46E53E6B73110A79455398AD /* Pods-DukeHack-environment.h */,
+				056E829AECFF2C9041DC0813 /* Pods-DukeHack-resources.sh */,
+				61F051CA63F53D7D45B95763 /* Pods-DukeHack.debug.xcconfig */,
+				D6291C735BFC2224D7AFB4B2 /* Pods-DukeHack.release.xcconfig */,
+			);
+			name = "Pods-DukeHack";
+			path = "Target Support Files/Pods-DukeHack";
+			sourceTree = "<group>";
+		};
+		B621052DD64EB9D6103AF0F5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				96D2141DE60FF69E7E42081C /* Pods-DukeHack-PulsingHalo.xcconfig */,
+				4556F36570DDF3755557AF60 /* Pods-DukeHack-PulsingHalo-Private.xcconfig */,
+				D721DAAAE932F7B24706955F /* Pods-DukeHack-PulsingHalo-dummy.m */,
+				4A3A5B1DF9E803AA13C6EE3A /* Pods-DukeHack-PulsingHalo-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-DukeHack-PulsingHalo";
+			sourceTree = "<group>";
+		};
+		C2B46350ADA2D0744167DCA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10B60A3E9BB50C5875E6FBD2 /* PulsingHalo */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		ECC30A347B46112FEB2C17FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				62213494F7E8153AB880A634 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		771568A708F8DED100EEE767 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29E2F61F921670CC53320E0D /* PulsingHaloLayer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7A3296CC7790B3C16C60EA9C /* Pods-DukeHack-PulsingHalo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7224AC678C45352654832C55 /* Build configuration list for PBXNativeTarget "Pods-DukeHack-PulsingHalo" */;
+			buildPhases = (
+				A36211E0B14745B642D89B72 /* Sources */,
+				A50B5234FF09E82BA76BCC63 /* Frameworks */,
+				771568A708F8DED100EEE767 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-DukeHack-PulsingHalo";
+			productName = "Pods-DukeHack-PulsingHalo";
+			productReference = 63EA22781A24B929031FD285 /* libPods-DukeHack-PulsingHalo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B3783A2309F612040FEB92AE /* Pods-DukeHack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC4518FBADE448205C694157 /* Build configuration list for PBXNativeTarget "Pods-DukeHack" */;
+			buildPhases = (
+				7F16363A9DEE4B3421D03DF0 /* Sources */,
+				D2C9529DB1353077792C95CA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF84510B8C0F54CA2E7287B3 /* PBXTargetDependency */,
+			);
+			name = "Pods-DukeHack";
+			productName = "Pods-DukeHack";
+			productReference = 34874F500C39356F3DE38397 /* libPods-DukeHack.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AEE3A4F466F31FE2592DA973 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 1337FCA86D39A4ED69BDC540 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D7B1E64C1B4F064FB2F9203;
+			productRefGroup = 3AA14C7FA6526EB374B77F5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B3783A2309F612040FEB92AE /* Pods-DukeHack */,
+				7A3296CC7790B3C16C60EA9C /* Pods-DukeHack-PulsingHalo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F16363A9DEE4B3421D03DF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD3E608CC72F8F2CBA78087 /* Pods-DukeHack-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A36211E0B14745B642D89B72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDD277F8BE6D929C40B13BE8 /* Pods-DukeHack-PulsingHalo-dummy.m in Sources */,
+				BFEEE11783AA001B1C95B295 /* PulsingHaloLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DF84510B8C0F54CA2E7287B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A3296CC7790B3C16C60EA9C /* Pods-DukeHack-PulsingHalo */;
+			targetProxy = D12C4632C8C1EC2258766EF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0E275D54DB3C58C2AD0D07B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4556F36570DDF3755557AF60 /* Pods-DukeHack-PulsingHalo-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-DukeHack-PulsingHalo/Pods-DukeHack-PulsingHalo-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		17BAACF580C51525E4B653C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6291C735BFC2224D7AFB4B2 /* Pods-DukeHack.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		53B9294180570B512A0154AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A48E9898E0DD5D53B9B091BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		DD720DEDE57F3B88100AFC48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4556F36570DDF3755557AF60 /* Pods-DukeHack-PulsingHalo-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-DukeHack-PulsingHalo/Pods-DukeHack-PulsingHalo-prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F38CF1F26C79109A97E96767 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61F051CA63F53D7D45B95763 /* Pods-DukeHack.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1337FCA86D39A4ED69BDC540 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A48E9898E0DD5D53B9B091BF /* Debug */,
+				53B9294180570B512A0154AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7224AC678C45352654832C55 /* Build configuration list for PBXNativeTarget "Pods-DukeHack-PulsingHalo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E275D54DB3C58C2AD0D07B0 /* Debug */,
+				DD720DEDE57F3B88100AFC48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC4518FBADE448205C694157 /* Build configuration list for PBXNativeTarget "Pods-DukeHack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F38CF1F26C79109A97E96767 /* Debug */,
+				17BAACF580C51525E4B653C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AEE3A4F466F31FE2592DA973 /* Project object */;
+}
