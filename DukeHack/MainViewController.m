@@ -18,7 +18,7 @@
 #import "LoadingViewController.h"
 #import <MapKit/MapKit.h>
 #import "AppCommunication.h"
-
+#import "PulsingHaloLayer.h"
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
 
@@ -253,7 +253,7 @@
 #pragma mark - Buttons
 
 - (IBAction)beginPressed:(id)sender {
-    
+    [self pulse];
     if(self.beginButton.selected)
     {
         [self.musicPlayer pause];
@@ -362,12 +362,26 @@
 
 -(void)pulseAnimation
 {
-    self.containerView.alpha = 0.5;
-    [UIView animateWithDuration:1.0 animations:^{
-        self.containerView.alpha = 1.0;
-
-    } completion:NULL];
+//    self.containerView.alpha = 0.5;
+//    [UIView animateWithDuration:1.0 animations:^{
+//        self.containerView.alpha = 1.0;
+//
+//    } completion:NULL];
     
 }
-
+-(void)pulse
+{
+    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
+    halo.position = self.view.center;
+    UIColor *color = [UIColor colorWithRed:245.0/255.0
+                                     green:30.0/255.0
+                                      blue:30.0/255.0
+                                     alpha:1.0];
+    
+    halo.backgroundColor = color.CGColor;
+    halo.radius = 240.0;
+    
+    [self.view.layer addSublayer:halo];
+    
+}
 @end
