@@ -66,7 +66,11 @@
     
     self.animationGroup = [CAAnimationGroup animation];
     self.animationGroup.duration = self.animationDuration + self.pulseInterval;
-    self.animationGroup.repeatCount = INFINITY;
+    if(self.pulseOnce){
+        self.animationGroup.repeatCount = 1;
+    } else{
+        self.animationGroup.repeatCount = INFINITY;
+    }
     self.animationGroup.removedOnCompletion = NO;
     self.animationGroup.timingFunction = defaultCurve;
     

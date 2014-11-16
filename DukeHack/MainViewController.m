@@ -26,7 +26,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
 @property (strong, nonatomic) IBOutlet UILabel *unitLabel;
 @property (strong, nonatomic) IBOutlet UIView *upperView;
-
+@property (strong, nonatomic) IBOutlet UIView *songView;
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UILabel *bpmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *songTitleLabel;
@@ -37,6 +38,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *resumeButton;
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) IBOutlet UIButton *beginButton;
+@property (strong, nonatomic) IBOutlet UIButton *prevButton;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSTimer *animationTimer;
 @property (strong, nonatomic) MPMusicPlayerController *musicPlayer;
@@ -50,6 +53,7 @@
 @property (nonatomic, assign) float previousState;
 @property (nonatomic, assign) float liveState;
 @property (nonatomic, strong) NSMutableArray* totalAnnotations;
+@property (nonatomic, strong) PulsingHaloLayer *halo;
 @end
 
 @implementation MainViewController{
@@ -149,9 +153,19 @@ struct myResult quadReg(int n,double x[],double y[])
     coefA = res.a;
     coefB = res.b;
     coefC = res.c;
-    double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
-    NSLog(@"distance:%f",fabs(distance));
-    return (fabs(distance*111320));
+
+    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
+    if(res.a>0.0)
+    {
+        double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
+        NSLog(@"distance:%f",distance);
+        return (distance*111320);
+    }
+    else
+    {
+        return [self.totalAnnotations[self.totalAnnotations.count-1] distanceFromLocation:self.totalAnnotations[0]];
+    }
+
     
 }
 -(void)getSongs{
@@ -176,8 +190,9 @@ struct myResult quadReg(int n,double x[],double y[])
         NSLog(@"retrieved:%@",self.songDic.mapOfTempos);
     }
     
-    
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -225,6 +240,12 @@ struct myResult quadReg(int n,double x[],double y[])
     [super viewWillAppear:animated];
     self.doneButton.hidden=YES;
     self.resumeButton.hidden=YES;
+    //self.nextButton.hidden=YES;
+    //self.prevButton.hidden=YES;
+    //self.songView.hidden=YES;
+    
+    
+    
 }
 
 #pragma GPS
@@ -298,7 +319,22 @@ struct myResult quadReg(int n,double x[],double y[])
         
         if(self.timeLapse&&self.prevLocation!=nil)
         {
-            double traveledDist = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
+            double traveledDist;
+            if(self.totalAnnotations.count>2)
+            {
+                         traveledDist    = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
+                NSLog(@"Quad Reg");
+            }
+            else if(self.totalAnnotations.count==2)
+            {
+                traveledDist = [newLocation distanceFromLocation:self.prevLocation];
+                NSLog(@"Only two loc");
+            }
+            else
+            {
+                NSLog(@"No Change");
+            }
+
             double speed1 = distanceChange/self.timeLapse;
             milesPerHour = speed1 *2.23694;
             stepsPerMin = (traveledDist/self.timeLapse);
@@ -382,24 +418,36 @@ struct myResult quadReg(int n,double x[],double y[])
 #pragma mark - Buttons
 
 - (IBAction)beginPressed:(id)sender {
-    [self pulse];
+    
+    //pause
     if(self.beginButton.selected)
     {
         [self.musicPlayer pause];
+        [self.halo removeAllAnimations];
         self.beginButton.selected=NO;
         self.doneButton.hidden=NO;
         self.resumeButton.hidden=NO;
+        self.prevButton.hidden=YES;
+        self.nextButton.hidden=YES;
         self.beginButton.hidden=YES;
+        
         
         if ([self.timer isValid]) {
             [self.timer invalidate];
         }
         self.timer = nil;
         
+       
+        
+        
     } else
     {
+        [self pulse];
+       // [self buttonPulse:[self.beginButton center]];
         [self playPlaylistForState:@"50.000000"];
         self.beginButton.selected=YES;
+        self.nextButton.hidden=NO;
+        self.prevButton.hidden=NO;
         seconds=0;
         if (!self.timer) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:0.01f
@@ -445,6 +493,7 @@ struct myResult quadReg(int n,double x[],double y[])
     self.beginButton.selected=NO;
     [self.musicPlayer pause];
     self.animationTimer=nil;
+    [self.halo removeAllAnimations];
 }
 
 - (void)timerFired:(NSTimer *)timer
@@ -468,6 +517,10 @@ struct myResult quadReg(int n,double x[],double y[])
 
 
 }
+- (IBAction)previousPressed:(id)sender {
+    
+    
+}
 - (IBAction)nextPressed:(id)sender {
     __block NSString *stateString=@"";
     if(numberOfTimesUpdated%2==0)
@@ -486,6 +539,7 @@ struct myResult quadReg(int n,double x[],double y[])
     NSLog(@"pressed:%@",stateString);
     if(!self.beginButton.selected){
         [self.musicPlayer pause];
+        
     }
 }
 
@@ -500,18 +554,33 @@ struct myResult quadReg(int n,double x[],double y[])
 }
 -(void)pulse
 {
-    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
-    halo.position = self.view.center;
+    self.halo = [PulsingHaloLayer layer];
+    self.halo.position = self.view.center;
     UIColor *color = [UIColor colorWithRed:245.0/255.0
                                      green:30.0/255.0
                                       blue:30.0/255.0
                                      alpha:1.0];
     
-    halo.backgroundColor = color.CGColor;
-    halo.radius = 240.0;
-    halo.pulseInterval=60.0/self.liveState;
+    self.halo.backgroundColor = color.CGColor;
+    self.halo.radius = 240.0;
+    self.halo.pulseInterval=60.0/self.liveState;
+    self.halo.pulseOnce=NO;
+    [self.view.layer addSublayer:self.halo];
     
-    [self.view.layer addSublayer:halo];
+}
+
+-(void)buttonPulse:(CGPoint)point{
+    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
+    halo.position = point;
+    halo.radius = 50;
+    halo.pulseOnce=YES;
+    [self.bottomView.layer addSublayer:halo];
+    UIColor *color = [UIColor colorWithRed:245.0/255.0
+                                     green:30.0/255.0
+                                      blue:30.0/255.0
+                                     alpha:1.0];
+    halo.backgroundColor = color.CGColor;
+    
     
 }
 @end
