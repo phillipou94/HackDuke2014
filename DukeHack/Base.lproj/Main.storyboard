@@ -19,6 +19,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BwN-Z6-zLw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-rH-R6r">
+                                        <rect key="frame" x="16" y="486" width="46" height="21"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gc-Be-BU4">
                                 <rect key="frame" x="0.0" y="515" width="600" height="85"/>
                                 <subviews>
@@ -170,25 +182,19 @@
                                     <constraint firstItem="VLs-U1-cLT" firstAttribute="top" secondItem="1QX-KO-EGi" secondAttribute="top" constant="54" id="yxp-KP-GPN"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Miles:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAf-rH-R6r">
-                                <rect key="frame" x="16" y="486" width="46" height="21"/>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDs-y3-1F4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDs-y3-1F4">
                                 <rect key="frame" x="550" y="486" width="34" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2o-Ag-zOV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2o-Ag-zOV">
                                 <rect key="frame" x="499" y="486" width="43" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00f-uH-Jju">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00f-uH-Jju">
                                 <rect key="frame" x="65" y="486" width="34" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <color key="textColor" red="0.88128021410000001" green="0.88128021410000001" blue="0.88128021410000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -204,28 +210,23 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4gc-Be-BU4" firstAttribute="top" secondItem="Ew7-nO-bwT" secondAttribute="top" constant="515" id="1Lu-oY-ua0"/>
                             <constraint firstAttribute="trailing" secondItem="yXe-X0-W2s" secondAttribute="trailing" id="2N5-Zf-R2E"/>
                             <constraint firstItem="yXe-X0-W2s" firstAttribute="leading" secondItem="4gc-Be-BU4" secondAttribute="leading" id="9GR-Ks-g6L"/>
                             <constraint firstItem="1QX-KO-EGi" firstAttribute="leading" secondItem="Ew7-nO-bwT" secondAttribute="leadingMargin" constant="12" id="B4z-5d-BxP"/>
                             <constraint firstItem="4gc-Be-BU4" firstAttribute="trailing" secondItem="yXe-X0-W2s" secondAttribute="trailing" id="Ntt-2h-8UP"/>
-                            <constraint firstItem="4gc-Be-BU4" firstAttribute="top" secondItem="LAf-rH-R6r" secondAttribute="bottom" constant="8" symbolic="YES" id="OU0-F3-pcI"/>
                             <constraint firstItem="00f-uH-Jju" firstAttribute="baseline" secondItem="X2o-Ag-zOV" secondAttribute="baseline" id="PJX-gZ-sCB"/>
                             <constraint firstItem="1QX-KO-EGi" firstAttribute="top" secondItem="yXe-X0-W2s" secondAttribute="bottom" constant="85" id="XfW-vu-ge2"/>
                             <constraint firstItem="4gc-Be-BU4" firstAttribute="top" secondItem="1QX-KO-EGi" secondAttribute="bottom" constant="78" id="Zck-qI-8a0"/>
                             <constraint firstItem="XDs-y3-1F4" firstAttribute="trailing" secondItem="Ew7-nO-bwT" secondAttribute="trailingMargin" id="aMs-UY-7yr"/>
                             <constraint firstItem="yXe-X0-W2s" firstAttribute="top" secondItem="Ew7-nO-bwT" secondAttribute="top" id="axT-Lc-gKd"/>
                             <constraint firstItem="XDs-y3-1F4" firstAttribute="leading" secondItem="X2o-Ag-zOV" secondAttribute="trailing" constant="8" symbolic="YES" id="eSd-u5-vCt"/>
-                            <constraint firstItem="00f-uH-Jju" firstAttribute="leading" secondItem="LAf-rH-R6r" secondAttribute="trailing" constant="3" id="fAG-X7-mym"/>
-                            <constraint firstItem="LAf-rH-R6r" firstAttribute="leading" secondItem="Ew7-nO-bwT" secondAttribute="leadingMargin" id="gcx-KD-7xe"/>
                             <constraint firstItem="1QX-KO-EGi" firstAttribute="top" secondItem="Ew7-nO-bwT" secondAttribute="top" constant="222" id="hPv-yQ-kkT"/>
                             <constraint firstItem="XDs-y3-1F4" firstAttribute="baseline" secondItem="X2o-Ag-zOV" secondAttribute="baseline" id="kmf-jy-MMw"/>
                             <constraint firstItem="4gc-Be-BU4" firstAttribute="bottom" secondItem="QqB-ey-CPL" secondAttribute="top" id="mjR-tZ-I0e"/>
                             <constraint firstItem="4gc-Be-BU4" firstAttribute="leading" secondItem="Ew7-nO-bwT" secondAttribute="leading" id="ql7-yh-odv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1QX-KO-EGi" secondAttribute="trailing" constant="12" id="xt0-X3-aa2"/>
-                            <constraint firstItem="00f-uH-Jju" firstAttribute="baseline" secondItem="LAf-rH-R6r" secondAttribute="baseline" id="zTe-my-Czo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bns-At-cJf">
@@ -252,6 +253,7 @@
                         <outlet property="artistNameLabel" destination="DeY-Bg-87e" id="grv-Cj-GbW"/>
                         <outlet property="beginButton" destination="8rz-FV-TYX" id="2wG-E6-9eg"/>
                         <outlet property="bpmLabel" destination="saX-oV-0jf" id="f45-sW-Bcy"/>
+                        <outlet property="containerView" destination="BwN-Z6-zLw" id="hyB-FD-oLp"/>
                         <outlet property="doneButton" destination="lvd-HY-Fqw" id="bJM-U4-Cey"/>
                         <outlet property="milesLabel" destination="00f-uH-Jju" id="Z3Y-X9-rrU"/>
                         <outlet property="resumeButton" destination="mw2-cg-jkd" id="REP-7g-YD1"/>
@@ -315,7 +317,7 @@
         <!--Loading View Controller-->
         <scene sceneID="2cA-KQ-Sjz">
             <objects>
-                <viewController storyboardIdentifier="LoadingViewController" id="YXb-gd-o1g" customClass="LoadingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loadView" id="YXb-gd-o1g" customClass="LoadingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kvO-aY-Vc1"/>
                         <viewControllerLayoutGuide type="bottom" id="v3M-VP-aFy"/>

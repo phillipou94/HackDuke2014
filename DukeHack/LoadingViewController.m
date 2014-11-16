@@ -54,7 +54,7 @@
             //this will start the image loading in backgground
             
             [self getBeatsPerMinute:song];
-            NSLog(@"done:%@",self.mapOfTempos);
+           // NSLog(@"done:%@",self.mapOfTempos);
             counter++;
             if(counter ==[arrayOfSongs count]){
                 NSLog(@"Actually done");
@@ -63,7 +63,7 @@
                 songDic.mapOfTempos=self.mapOfTempos;
                 NSError *error = nil;
                 [context save:&error];
-                NSLog(@"nice:%@",songDic.mapOfTempos);
+                //NSLog(@"nice:%@",songDic.mapOfTempos);
                 if(error){
                     NSLog(@"unable to save");
                 }
@@ -75,6 +75,8 @@
     
     
 }
+
+
 
 -(void) getBeatsPerMinute:(MPMediaItem*)song
 {

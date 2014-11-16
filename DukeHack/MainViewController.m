@@ -18,6 +18,7 @@
 
 @interface MainViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UILabel *bpmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *artistNameLabel;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) IBOutlet UIButton *beginButton;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) NSTimer *animationTimer;
 @property (strong, nonatomic) MPMusicPlayerController *musicPlayer;
 @property (strong, nonatomic) SongDictionary *songDic;
 @property (nonatomic,strong) CLLocationManager* locationManager;
@@ -37,6 +39,7 @@
 @property (nonatomic, assign) NSMutableArray *playList;
 @property (nonatomic, assign) float currentState;
 @property (nonatomic, assign) float previousState;
+@property (nonatomic, assign) float liveState;
 @end
 
 @implementation MainViewController{
@@ -56,7 +59,7 @@
     
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:nil];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *ivc = [storyboard instantiateViewControllerWithIdentifier:@"LoadingViewController"];
+    UIViewController *ivc = [storyboard instantiateViewControllerWithIdentifier:@"loadView"];
     [(LoadingViewController*)self presentViewController:ivc animated:NO completion:nil];
     if([fetchedObjects count]<1){
         
@@ -75,12 +78,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
     [self.view addSubview: volumeView];
     
     annotationNum = 0;
-    self.currentState=0;
-    self.previousState=0;
+    self.liveState=50.0;
+    self.currentState=50.0;
+    self.previousState=50.0;
     numberOfTimesUpdated=0;
     self.milesLabel.text = @"0.0";
     [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
@@ -162,12 +169,16 @@
             [[AppCommunication sharedManager].myAnnotations addObject:point];
             self.bpmLabel.text = [NSString stringWithFormat:@"%f",(speed*MY_COVERSION)];
             CGFloat roundingValue = 50.0; //round to nearest 50
-            CGFloat state= floor(speed / roundingValue)*50;
+            self.liveState= ceilf(speed / roundingValue)*50;
+            NSLog(@"nice:%f",(self.liveState)/60);
+            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self
+                                                                 selector: @selector(pulseAnimation) userInfo: nil repeats: YES];
+            NSLog(@"STATE:%f",self.liveState);
             if(numberOfTimesUpdated%2==0){
-                self.previousState=state+50.000000;
+                self.previousState=self.liveState;
                 NSLog(@"prevState:%f",self.previousState);
             } else{
-                self.currentState=state+50.000000;
+                self.currentState=self.liveState;
                 NSLog(@"currentSTate:%f",self.currentState);
             }
             if(self.previousState==self.currentState)
@@ -176,10 +187,10 @@
                 NSLog(@"do nothing");
             } else{
                 //change playlist
-                if(state>150.000000){
+                if(self.liveState>150.000000){
                     [self playPlaylistForState:@"150.000000"];
                 }else{
-                    NSString *stateString = [NSString stringWithFormat:@"%f",state];
+                    NSString *stateString = [NSString stringWithFormat:@"%f",self.liveState];
                     [self playPlaylistForState:stateString];
                 }
                 NSLog(@"change playlist");
@@ -205,7 +216,7 @@
     self.playList = [self.songDic.mapOfTempos objectForKey:state];
     
     //Choose the first indexed song
-    NSInteger randomInt = arc4random()%[self.playList count];
+    NSInteger randomInt = arc4random_uniform([self.playList count]);
     NSString *songID = [self.playList objectAtIndex:randomInt];
     //Use the MPMediaItemPropertyPersistentID to play the song
     MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:songID forProperty:MPMediaItemPropertyPersistentID];
@@ -271,7 +282,9 @@
                                                     selector:@selector(timerFired:)
                                                     userInfo:nil
                                                      repeats:YES];
+        
     }
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self selector: @selector(pulseAnimation) userInfo: nil repeats: YES];
 
     
 }
@@ -281,9 +294,11 @@
     self.beginButton.hidden=NO;
     self.beginButton.selected=NO;
     [self.musicPlayer pause];
+    self.animationTimer=nil;
 }
 
-- (void)timerFired:(NSTimer *)timer {
+- (void)timerFired:(NSTimer *)timer
+{
     if(seconds-self.prevSeconds>10.0)
     {
         self.timeLapse = seconds - self.prevSeconds;
@@ -294,10 +309,10 @@
     NSInteger minutes = (seconds/60);
     NSInteger seconds_converted = (seconds -minutes *60);
     //NSString *secondsString = seconds;
-    if(seconds_converted<10){
+    if(seconds_converted<10) {
         self.timeLabel.text = [NSString stringWithFormat:@"%d:0%d",minutes,seconds_converted];
     }
-    else{
+    else {
         self.timeLabel.text = [NSString stringWithFormat:@"%d:%d",minutes,seconds_converted];
     }
 
@@ -305,9 +320,12 @@
 }
 - (IBAction)nextPressed:(id)sender {
     __block NSString *stateString=@"";
-    if(numberOfTimesUpdated%2==0){
+    if(numberOfTimesUpdated%2==0)
+    {
         stateString=[NSString stringWithFormat:@"%f",self.previousState];
+        
     }else{
+        
         stateString=[NSString stringWithFormat:@"%f",self.currentState];
     }
     if([stateString isEqualToString:@"0.000000"])
@@ -321,5 +339,14 @@
     }
 }
 
+-(void)pulseAnimation
+{
+    self.containerView.alpha = 0.5;
+    [UIView animateWithDuration:1.0 animations:^{
+        self.containerView.alpha = 1.0;
+
+    } completion:NULL];
+    
+}
 
 @end
