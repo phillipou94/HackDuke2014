@@ -4,7 +4,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'DukeHack' do
-
+pod "PulsingHalo"
 end
 
 target 'DukeHackTests' do
