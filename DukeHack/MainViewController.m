@@ -144,9 +144,17 @@ struct myResult quadReg(int n,double x[],double y[])
     coefA = res.a;
     coefB = res.b;
     coefC = res.c;
-    double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
-    NSLog(@"distance:%f",distance);
-    return (distance*111320);
+    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
+    if(res.a>0.0)
+    {
+        double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
+        NSLog(@"distance:%f",distance);
+        return (distance*111320);
+    }
+    else
+    {
+        return [self.totalAnnotations[self.totalAnnotations.count-1] distanceFromLocation:self.totalAnnotations[0]];
+    }
     
 }
 -(void)getSongs{
@@ -273,7 +281,22 @@ struct myResult quadReg(int n,double x[],double y[])
         
         if(self.timeLapse&&self.prevLocation!=nil)
         {
-            double traveledDist = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
+            double traveledDist;
+            if(self.totalAnnotations.count>2)
+            {
+                         traveledDist    = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
+                NSLog(@"Quad Reg");
+            }
+            else if(self.totalAnnotations.count==2)
+            {
+                traveledDist = [newLocation distanceFromLocation:self.prevLocation];
+                NSLog(@"Only two loc");
+            }
+            else
+            {
+                NSLog(@"No Change");
+            }
+
             double speed1 = distanceChange/self.timeLapse;
             double speed = traveledDist/self.timeLapse;
             NSLog(@"sec:%f",self.timeLapse);
