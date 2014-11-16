@@ -56,6 +56,9 @@
     bool updatedRecently;
     int numberOfTimesUpdated;
     bool usingMiles;
+    double coefA;
+    double coefB;
+    double coefC;
 }
 struct myResult
 {
@@ -126,9 +129,9 @@ struct myResult quadReg(int n,double x[],double y[])
 -(double)functionateWithCoeffA:(double)a WithCoeffB:(double)b WithX:(double)x
 {
     double temp = 2*a*x+b;
-    return pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp);
+    return (pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp))/(4*a);
 }
--(void)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayStuff
+-(double)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayStuff
 {
     double myX[num];
     double myY[num];
@@ -138,7 +141,13 @@ struct myResult quadReg(int n,double x[],double y[])
         myY[i] = ((CLLocation*)arrayStuff[i]).coordinate.longitude;
     }
     struct myResult res = quadReg(num, myX, myY);
-    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
+    coefA = res.a;
+    coefB = res.b;
+    coefC = res.c;
+    double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
+    NSLog(@"distance:%f",distance);
+    return (distance*111320);
+    
 }
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -227,12 +236,15 @@ struct myResult quadReg(int n,double x[],double y[])
 
     NSLog(@"updatedLocation");
     numberOfTimesUpdated++;
+    CLLocation *newLocation = [locations lastObject];
+    [self.totalAnnotations addObject:newLocation];
+    NSLog(@"%f",[newLocation distanceFromLocation:self.prevLocation]);
+    
     if(!updatedRecently)
     {
         updatedRecently = true;
         
-        CLLocation *newLocation = [locations lastObject];
-        [self.totalAnnotations addObject:newLocation];
+
         CLLocationDistance distanceChange = 0;
         if(self.prevLocation!=nil)
         {
@@ -261,10 +273,12 @@ struct myResult quadReg(int n,double x[],double y[])
         
         if(self.timeLapse&&self.prevLocation!=nil)
         {
-
-            double speed = distanceChange/self.timeLapse;
+            double traveledDist = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
+            double speed1 = distanceChange/self.timeLapse;
+            double speed = traveledDist/self.timeLapse;
             NSLog(@"sec:%f",self.timeLapse);
             NSLog(@"speed:%f",speed);
+            NSLog(@"oldspeed:%f",speed1);
             MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
             point.coordinate = newLocation.coordinate;
             [AppCommunication sharedManager].startPoint = point.coordinate;
@@ -300,6 +314,7 @@ struct myResult quadReg(int n,double x[],double y[])
                 }
                 NSLog(@"change playlist");
             }
+            self.totalAnnotations = [NSMutableArray array];
         }
         self.prevLocation = newLocation;
         
