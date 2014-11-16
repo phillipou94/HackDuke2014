@@ -19,6 +19,8 @@
 #import <MapKit/MapKit.h>
 #import "AppCommunication.h"
 #import "PulsingHaloLayer.h"
+//#include "PolynomialRegression.h"
+
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
 
@@ -53,8 +55,87 @@
     int numberOfTimesUpdated;
     bool usingMiles;
 }
+struct myResult
+{
+    double a;
+    double b;
+    double c;
+};
+struct myResult quadReg(int n,double x[],double y[])
+{
+    int  i, j, k;
+    float sumx, sumxsq, sumy, sumxy;
+    float sumx3, sumx4, sumxsqy, a[20][20], u=0.0, b[20];
+    
+    // Scanf(%d, &n);
+    sumx = 0;
+    sumxsq = 0;
+    sumy = 0;
+    sumxy = 0;
+    sumx3 = 0;
+    sumx4 = 0;
+    sumxsqy = 0;
+    for(i=0;  i<n; i++)
+    {
+        //Scanf(%f %f, &x, &y);
+        sumx +=x[i];
+        sumxsq += pow(x[i],2);
+        sumx3 += pow(x[i],3);
+        sumx4 += pow(x[i],4);
+        sumy +=y[i];
+        sumxy += x[i] * y[i];
+        sumxsqy += pow(x[i],2) *y[i];
+    }
+    a[0][0] = n;
+    a[0][1] = sumx;
+    a[0][2] = sumxsq;
+    a[0][3] =
+    
+    sumy;
+    a[1][0] = sumx;
+    a[1][1] = sumxsq;
+    a[1][2] = sumx3;
+    a[1][3] = sumxy;
+    a[2][0] = sumxsq;
+    a[2][1] = sumx3;
+    a[2][2] = sumx4;
+    a[2][3] = sumxsqy;
+    
+    for(k=0;  k<=2; k++)
+    {
+        for(i=0;i<=2;i++)
+        {
+            if(i!=k)
+                u=a[i][k]/a[k][k];
+            for(j = k; j<=3; j++)
+                a[i][j]=a[i][j] - u * a[k][j];
+        }
+    }
+    
+    for(i=0;i<3;i++)
+    {
+        b[i] = a[i][3]/a[i][i];
+    }
+    //Printf(“y= %10.4fx +10.4 fx +%10.4f”,b[2],b[i],b[0]);
+    struct myResult temp;
+    temp.a = b[2];
+    temp.b = b[1];
+    temp.c = b[0];
+    return temp;
+}
 
-
+-(void)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayX withY:(NSMutableArray*)arrayY
+{
+    double myX[num];
+    double myY[num];
+    for(int i = 0; i <arrayX.count;i++)
+    {
+        myX[i] = ((NSNumber*)arrayX[i]).doubleValue;
+        myY[i] = ((NSNumber*)arrayY[i]).doubleValue;
+    }
+    struct myResult res = quadReg(num, myX, myY);
+    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
+}
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -83,23 +164,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSMutableArray* xArray = [NSMutableArray arrayWithObjects:@(-4.0), @(-3.0),@(-2.0),@(-1.0),@(0.0),@(1.0),@(2.0),@(3.0),@(4.0),@(5.0),nil];
+    NSMutableArray* yArray = [NSMutableArray arrayWithObjects:@(21.0),@(12.0),@(4.0),@(1.0),@(2.0),@(7.0),@(15.0),@(30.0),@(45.0),@(67.0), nil];
+    int count = xArray.count;
+    [self calcQuadRegWithElemets:count withX:xArray withY:yArray];
     
-    
-    
-    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
-    [self.view addSubview: volumeView];
-    
-    annotationNum = 0;
-    self.liveState=50.0;
-    self.currentState=50.0;
-    self.previousState=50.0;
-    numberOfTimesUpdated=0;
-    self.milesLabel.text = @"0";
-    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
-    [self getSongs];
-    //[self startStandardUpdates];
-    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-    [self startStandardUpdates];
+//    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
+//    [self.view addSubview: volumeView];
+//    
+//    annotationNum = 0;
+//    self.liveState=50.0;
+//    self.currentState=50.0;
+//    self.previousState=50.0;
+//    numberOfTimesUpdated=0;
+//    self.milesLabel.text = @"0";
+//    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
+//    [self getSongs];
+//    //[self startStandardUpdates];
+//    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+//    [self startStandardUpdates];
 
 }
 
