@@ -47,17 +47,23 @@
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) CLLocation* prevLocation;
 @property (nonatomic,assign) float prevSeconds;
-@property (nonatomic,assign) float timeLapse;
+@property (nonatomic,assign) double timeLapse;
 @property (nonatomic, assign) NSMutableArray *playList;
 @property (nonatomic, assign) float currentState;
 @property (nonatomic, assign) float previousState;
 @property (nonatomic, assign) float liveState;
 @property (nonatomic, strong) NSMutableArray* totalAnnotations;
+
 @property (nonatomic, strong) PulsingHaloLayer *halo;
+
+@property (nonatomic, strong) NSMutableArray* fixedX;
+@property (nonatomic, strong) NSMutableArray* fixedY;
+@property (nonatomic, strong) NSMutableArray* timeStamp;
+
 @end
 
 @implementation MainViewController{
-    float seconds;
+    double seconds;
     int annotationNum;
     bool updatedRecently;
     int numberOfTimesUpdated;
@@ -65,9 +71,15 @@
     double coefA;
     double coefB;
     double coefC;
+
     
     double stepsPerMin;
     double milesPerHour;
+
+    double coefD;
+    CLLocation* current;
+    double time;
+
 }
 struct myResult
 {
@@ -135,38 +147,28 @@ struct myResult quadReg(int n,double x[],double y[])
     temp.c = b[0];
     return temp;
 }
--(double)functionateWithCoeffA:(double)a WithCoeffB:(double)b WithX:(double)x
-{
-    double temp = 2*a*x+b;
-    return (pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp))/(4*a);
-}
--(double)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayStuff
+-(void)calcQuadRegWithElemets:(int) num withT:(NSMutableArray*)arrayT withXY:(NSMutableArray*)arrayXY do:(NSString*)str
 {
     double myX[num];
     double myY[num];
-    for(int i = 0; i <arrayStuff.count;i++)
+    for(int i = 0; i <arrayT.count;i++)
     {
-        myX[i] = ((CLLocation*)arrayStuff[i]).coordinate.latitude;
-        myY[i] = ((CLLocation*)arrayStuff[i]).coordinate.longitude;
+        myX[i] = ((NSNumber*)arrayT[i]).doubleValue;
+        myY[i] = ((NSNumber*)arrayXY[i]).doubleValue;
     }
     struct myResult res = quadReg(num, myX, myY);
-    coefA = res.a;
-    coefB = res.b;
-    coefC = res.c;
 
-    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
-    if(res.a>0.0)
+    if([str isEqual:@"x"])
     {
-        double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
-        NSLog(@"distance:%f",distance);
-        return (distance*111320);
+        coefA = res.a;
+        coefB = res.b;
     }
     else
     {
-        return [self.totalAnnotations[self.totalAnnotations.count-1] distanceFromLocation:self.totalAnnotations[0]];
+        coefC = res.a;
+        coefD = res.b;
     }
 
-    
 }
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -197,8 +199,12 @@ struct myResult quadReg(int n,double x[],double y[])
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    time = 0.0;
     self.totalAnnotations = [NSMutableArray array];
-    
+    self.fixedX = [NSMutableArray array];
+    self.fixedY = [NSMutableArray array];
+    self.timeStamp = [NSMutableArray array];
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
     [self.view addSubview: volumeView];
     
@@ -283,8 +289,37 @@ struct myResult quadReg(int n,double x[],double y[])
     NSLog(@"updatedLocation");
     numberOfTimesUpdated++;
     CLLocation *newLocation = [locations lastObject];
+    //get current Location
+
+    current = newLocation;
+    
     [self.totalAnnotations addObject:newLocation];
-    NSLog(@"%f",[newLocation distanceFromLocation:self.prevLocation]);
+    if(self.fixedX.count==0)
+    {
+        [self.fixedX addObject:@(0.0)];
+        [self.fixedY addObject:@(0.0)];
+        [self.timeStamp addObject:@(0.0)];
+        //uses prevlocation as origin of grid
+    }
+    else
+    {
+        double disty = [newLocation distanceFromLocation:self.prevLocation];
+        //distance from origin in meters
+        double latdif = newLocation.coordinate.latitude-self.prevLocation.coordinate.latitude;
+        //xcord from origin in coordinates
+        double londif = newLocation.coordinate.longitude-self.prevLocation.coordinate.longitude;
+        //ycord from origin in coordinates
+        double z = sqrt((latdif*latdif+londif*londif));
+        //distance from origin in coordinates
+        
+        [self.fixedX addObject:@(londif*disty/z)];
+        //adds xcord from origin in meters
+        [self.fixedY addObject:@(latdif*disty/z)];
+        //adds ycord from origin in meters
+        [self.timeStamp addObject:@(time)];
+        //adds current timeStamp
+//        NSLog(@"x:%f,y:%f,Z:%f,t:%f",londif*disty/z,latdif*disty/z,disty,seconds);
+    }
     
     if(!updatedRecently)
     {
@@ -297,7 +332,7 @@ struct myResult quadReg(int n,double x[],double y[])
             distanceChange = [newLocation distanceFromLocation:self.prevLocation];
             if(usingMiles)
             {
-                self.milesLabel.text = [NSString stringWithFormat:@"%f",(self.milesLabel.text.doubleValue+distanceChange*MY_COVERSION_MILE)];
+                self.milesLabel.text = [NSString stringWithFormat:@"%.2f",(self.milesLabel.text.doubleValue+distanceChange*MY_COVERSION_MILE)];
             }
             else
             {
@@ -307,94 +342,102 @@ struct myResult quadReg(int n,double x[],double y[])
                     usingMiles=true;
                     self.milesMetricLabel.text = @"Miles:";
                     double temp = 0.0 + self.milesLabel.text.intValue;
-                    self.milesLabel.text = [NSString stringWithFormat:@"%f",(temp*FEET_TO_MILES)];
+                    self.milesLabel.text = [NSString stringWithFormat:@"%.2f",(temp*FEET_TO_MILES)];
                 }
                 
             }
 
-
-        }
-        
-        
-        
-        if(self.timeLapse&&self.prevLocation!=nil)
-        {
             double traveledDist;
-            if(self.totalAnnotations.count>2)
-            {
-                         traveledDist    = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
-                NSLog(@"Quad Reg");
-            }
-            else if(self.totalAnnotations.count==2)
-            {
-                traveledDist = [newLocation distanceFromLocation:self.prevLocation];
-                NSLog(@"Only two loc");
-            }
-            else
-            {
-                NSLog(@"No Change");
-            }
-
-            double speed1 = distanceChange/self.timeLapse;
-            milesPerHour = speed1 *2.23694;
-            stepsPerMin = (traveledDist/self.timeLapse);
-            NSLog(@"sec:%f",self.timeLapse);
-            NSLog(@"speed:%f",stepsPerMin);
-            NSLog(@"oldspeed:%f",speed1);
-            MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-            point.coordinate = newLocation.coordinate;
-            [AppCommunication sharedManager].startPoint = point.coordinate;
-            annotationNum++;
-            point.title = [NSString stringWithFormat: @"%d",annotationNum];
-            point.subtitle = [NSString stringWithFormat: @"speed:%f",stepsPerMin];
-            [[AppCommunication sharedManager].myAnnotations addObject:point];
-            if(self.bpmLabel.tag==0){
-                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(stepsPerMin*MY_COVERSION)];
-            } else{
-                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(milesPerHour)];
-            }
-            
-            
-            CGFloat roundingValue = 50.0; //round to nearest 50
-            self.liveState= ceilf(stepsPerMin/ roundingValue)*50;
-            
-            NSLog(@"STATE:%f",self.liveState);
-            if(numberOfTimesUpdated%2==0){
-                self.previousState=self.liveState;
-                NSLog(@"prevState:%f",self.previousState);
-            } else{
-                self.currentState=self.liveState;
-                NSLog(@"currentSTate:%f",self.currentState);
-            }
-            if(self.previousState==self.currentState)
-            {
-                //do nothing
-                NSLog(@"do nothing");
-            } else{
-                //change playlist
-                if(self.liveState>150.000000){
-                    [self playPlaylistForState:@"150.000000"];
-                }else{
-                    NSString *stateString = [NSString stringWithFormat:@"%f",self.liveState];
-                    [self playPlaylistForState:stateString];
+            double arcLength;
+                if(self.fixedX.count>2)
+                {
+                    [self calcQuadRegWithElemets:self.fixedX.count withT:self.timeStamp withXY:self.fixedX do:@"x"];
+                    [self calcQuadRegWithElemets:self.fixedX.count withT:self.timeStamp withXY:self.fixedY do:@"y"];
+                    //Now coeff a,b,c,d should all be updated
+                    NSLog(@"A:%f,B:%f,C:%f,D:%f",coefA,coefB,coefC,coefD);
+                    arcLength = [self integralWithT:((NSNumber*)self.timeStamp[self.timeStamp.count-1]).doubleValue WithA:coefA WithB:coefB WithC:coefC WithD:coefD] - [self integralWithT:0.0 WithA:coefA WithB:coefB WithC:coefC WithD:coefD];
+                    //gets arcLength in meters
+                    
+                    NSLog(@"%f",arcLength);
+                    //traveledDist    = [self calcQuadRegWithElemets:self.fixedX.count withX:self.fixedX withY:self.fixedY];
+                    NSLog(@"Quad Reg");
                 }
-                NSLog(@"change playlist");
+                else if(self.fixedX.count==2)
+                {
+                    arcLength = [newLocation distanceFromLocation:self.prevLocation];
+                    //only 2 points to use so linear
+                }
+                else
+                {
+                    NSLog(@"No Noticible movement");
+                }
+            
+                double speed = arcLength/time;
+                //speed in meters/sec
+            
+                MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                point.coordinate = newLocation.coordinate;
+                [AppCommunication sharedManager].startPoint = point.coordinate;
+                annotationNum++;
+                point.title = [NSString stringWithFormat: @"%d",annotationNum];
+                point.subtitle = [NSString stringWithFormat: @"bpm:%f",(speed*MY_COVERSION)];
+                [[AppCommunication sharedManager].myAnnotations addObject:point];
+            
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(speed*MY_COVERSION)];
+            
+                CGFloat roundingValue = 50.0; //round to nearest 50
+                self.liveState= ceilf(speed / roundingValue)*50;
+                NSLog(@"nice:%f",(self.liveState)/60);
+                self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self
+                                                                     selector: @selector(pulseAnimation) userInfo: nil repeats: YES];
+                NSLog(@"STATE:%f",self.liveState);
+                if(numberOfTimesUpdated%2==0){
+                    self.previousState=self.liveState;
+                    NSLog(@"prevState:%f",self.previousState);
+                } else{
+                    self.currentState=self.liveState;
+                    NSLog(@"currentSTate:%f",self.currentState);
+                }
+                if(self.previousState==self.currentState ||self.liveState==0)
+                {
+                    //do nothing
+                    NSLog(@"do nothing");
+                } else{
+                    //change playlist
+                    if(self.liveState>150.000000){
+                        [self playPlaylistForState:@"150.000000"];
+                    } else{
+                        NSString *stateString = [NSString stringWithFormat:@"%f",self.liveState];
+                        NSLog(@"stateSTring:%@",stateString);
+                        [self playPlaylistForState:stateString];
+                    }
+                    NSLog(@"change playlist");
+                }
+                self.totalAnnotations = [NSMutableArray array];
             }
-            self.totalAnnotations = [NSMutableArray array];
-        }
-        self.prevLocation = newLocation;
+            self.prevLocation = newLocation;
+            
+            
         
+            
+            self.fixedX = [NSMutableArray array];
+            self.fixedY = [NSMutableArray array];
+            self.timeStamp = [NSMutableArray array];
+            time = 0.0;
+            //resets everything
+            
+            
+            
+            
         
-        NSString *latitude, *longitude;
-        
-        latitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.latitude];
-        longitude = [NSString stringWithFormat:@"%f",newLocation.coordinate.longitude];
-        //    NSLog(@"%@",latitude);
-        //    NSLog(@"%@",longitude);
-        
-
 
     }
+    if(!self.prevLocation)
+    {
+        self.prevLocation = newLocation;
+    }
+    
+        
 }
 
 -(void)playPlaylistForState: (NSString*)state{
@@ -414,7 +457,12 @@ struct myResult quadReg(int n,double x[],double y[])
     self.songTitleLabel.text = [songObject valueForProperty:MPMediaItemPropertyTitle];
     self.artistNameLabel.text = [songObject valueForProperty:MPMediaItemPropertyArtist];
 }
-
+-(double)integralWithT:(double)t WithA:(double)a WithB:(double)b WithC:(double)c WithD:(double)d
+{
+    return ((.25)*((((a*b)+(c*d))/((a*a)+(c*c)))+2*t)*sqrt(4*t*t*(a*a+c*c)+4*a*b*t+b*b+4*c*d*t+d*d))+(1/(4*(pow(a*a+c*c, 1.5))))*(pow(b*c-a*d, 2.0))*log10((sqrt(a*a+c*c)*sqrt(4*t*t*(a*a+c*c)+4*a*b*t+b*b+4*c*d*t+d*d))+2*a*a*t+a*b+2*c*c*t+c*d);
+    
+    
+}
 #pragma mark - Buttons
 
 - (IBAction)beginPressed:(id)sender {
@@ -498,6 +546,7 @@ struct myResult quadReg(int n,double x[],double y[])
 
 - (void)timerFired:(NSTimer *)timer
 {
+    time+=.01;
     if(seconds-self.prevSeconds>10.0)
     {
         self.timeLapse = seconds - self.prevSeconds;
@@ -584,3 +633,4 @@ struct myResult quadReg(int n,double x[],double y[])
     
 }
 @end
+
