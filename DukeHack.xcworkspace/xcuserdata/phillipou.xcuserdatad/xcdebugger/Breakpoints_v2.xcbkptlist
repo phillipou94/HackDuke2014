@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DukeHack/MainViewController.m"
-            timestampString = "437789374.178684"
+            timestampString = "437831604.278347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-getSongs"
-            landmarkType = "5">
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "quadReg()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,12 +72,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DukeHack/MainViewController.m"
-            timestampString = "437789374.178684"
+            timestampString = "437831800.597718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "-locationManager:didUpdateLocations:"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "-startStandardUpdates"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

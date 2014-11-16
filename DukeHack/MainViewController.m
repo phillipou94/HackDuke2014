@@ -24,6 +24,8 @@
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
+@property (strong, nonatomic) IBOutlet UILabel *unitLabel;
+@property (strong, nonatomic) IBOutlet UIView *upperView;
 
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UILabel *bpmLabel;
@@ -59,6 +61,9 @@
     double coefA;
     double coefB;
     double coefC;
+    
+    double stepsPerMin;
+    double milesPerHour;
 }
 struct myResult
 {
@@ -145,8 +150,8 @@ struct myResult quadReg(int n,double x[],double y[])
     coefB = res.b;
     coefC = res.c;
     double distance = [self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[arrayStuff.count-1]).coordinate.latitude]-[self functionateWithCoeffA:res.a WithCoeffB:res.b WithX:((CLLocation*)arrayStuff[0]).coordinate.latitude];
-    NSLog(@"distance:%f",distance);
-    return (distance*111320);
+    NSLog(@"distance:%f",fabs(distance));
+    return (fabs(distance*111320));
     
 }
 -(void)getSongs{
@@ -193,8 +198,28 @@ struct myResult quadReg(int n,double x[],double y[])
     //[self startStandardUpdates];
     self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
     [self startStandardUpdates];
+    self.unitLabel.tag=0;
+    self.bpmLabel.tag=0;
+        
 
 }
+- (IBAction)labelTapped:(id)sender {
+    NSLog(@"tapped");
+    if(self.unitLabel.tag==0){
+        self.unitLabel.text = @"Miles Per Hour";
+        self.unitLabel.tag=1;
+        self.bpmLabel.tag=1;
+        self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(milesPerHour)];
+    } else {
+        self.unitLabel.text = @"Steps Per Minute";
+        self.unitLabel.tag=0;
+        self.bpmLabel.tag=0;
+        self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(stepsPerMin*MY_COVERSION)];
+    }
+    
+}
+
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -275,23 +300,28 @@ struct myResult quadReg(int n,double x[],double y[])
         {
             double traveledDist = [self calcQuadRegWithElemets:self.totalAnnotations.count withX:self.totalAnnotations];
             double speed1 = distanceChange/self.timeLapse;
-            double speed = traveledDist/self.timeLapse;
+            milesPerHour = speed1 *2.23694;
+            stepsPerMin = (traveledDist/self.timeLapse);
             NSLog(@"sec:%f",self.timeLapse);
-            NSLog(@"speed:%f",speed);
+            NSLog(@"speed:%f",stepsPerMin);
             NSLog(@"oldspeed:%f",speed1);
             MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
             point.coordinate = newLocation.coordinate;
             [AppCommunication sharedManager].startPoint = point.coordinate;
             annotationNum++;
             point.title = [NSString stringWithFormat: @"%d",annotationNum];
-            point.subtitle = [NSString stringWithFormat: @"speed:%f",speed];
+            point.subtitle = [NSString stringWithFormat: @"speed:%f",stepsPerMin];
             [[AppCommunication sharedManager].myAnnotations addObject:point];
-            self.bpmLabel.text = [NSString stringWithFormat:@"%f",(speed*MY_COVERSION)];
+            if(self.bpmLabel.tag==0){
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(stepsPerMin*MY_COVERSION)];
+            } else{
+                self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(milesPerHour)];
+            }
+            
+            
             CGFloat roundingValue = 50.0; //round to nearest 50
-            self.liveState= ceilf(speed / roundingValue)*50;
-            NSLog(@"nice:%f",(self.liveState)/60);
-            self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self
-                                                                 selector: @selector(pulseAnimation) userInfo: nil repeats: YES];
+            self.liveState= ceilf(stepsPerMin/ roundingValue)*50;
+            
             NSLog(@"STATE:%f",self.liveState);
             if(numberOfTimesUpdated%2==0){
                 self.previousState=self.liveState;
@@ -479,6 +509,7 @@ struct myResult quadReg(int n,double x[],double y[])
     
     halo.backgroundColor = color.CGColor;
     halo.radius = 240.0;
+    halo.pulseInterval=60.0/self.liveState;
     
     [self.view.layer addSublayer:halo];
     
