@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Phillip Ou. All rights reserved.
 //
 #define MY_COVERSION 78.7401574806
+#define MY_COVERSION_MILE 0.000621371
+#define MY_CONVERSION_FEET 3.28084
+#define FEET_TO_MILES 0.000189394
 
 #import "MainViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -17,6 +20,7 @@
 #import "AppCommunication.h"
 
 @interface MainViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
 
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UILabel *bpmLabel;
@@ -47,6 +51,7 @@
     int annotationNum;
     bool updatedRecently;
     int numberOfTimesUpdated;
+    bool usingMiles;
 }
 
 
@@ -89,7 +94,7 @@
     self.currentState=50.0;
     self.previousState=50.0;
     numberOfTimesUpdated=0;
-    self.milesLabel.text = @"0.0";
+    self.milesLabel.text = @"0";
     [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
     [self getSongs];
     //[self startStandardUpdates];
@@ -144,11 +149,27 @@
         
         CLLocation *newLocation = [locations lastObject];
         
-        CLLocationDistance distanceChange = 0.0;
+        CLLocationDistance distanceChange = 0;
         if(self.prevLocation!=nil)
         {
             distanceChange = [newLocation distanceFromLocation:self.prevLocation];
-            self.milesLabel.text = [NSString stringWithFormat:@"%f",(self.milesLabel.text.doubleValue+distanceChange)];
+            if(usingMiles)
+            {
+                self.milesLabel.text = [NSString stringWithFormat:@"%f",(self.milesLabel.text.doubleValue+distanceChange*MY_COVERSION_MILE)];
+            }
+            else
+            {
+                self.milesLabel.text = [NSString stringWithFormat:@"%d",(int)(self.milesLabel.text.intValue+distanceChange*MY_CONVERSION_FEET)];
+                if(self.milesLabel.text.intValue>528)
+                {
+                    usingMiles=true;
+                    self.milesMetricLabel.text = @"Miles:";
+                    double temp = 0.0 + self.milesLabel.text.intValue;
+                    self.milesLabel.text = [NSString stringWithFormat:@"%f",(temp*FEET_TO_MILES)];
+                }
+                
+            }
+
 
         }
         
