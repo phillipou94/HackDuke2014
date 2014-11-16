@@ -169,24 +169,21 @@ struct myResult quadReg(int n,double x[],double y[])
 {
     [super viewDidLoad];
     self.totalAnnotations = [NSMutableArray array];
-    NSMutableArray* xArray = [NSMutableArray arrayWithObjects:@(-4.0), @(-3.0),@(-2.0),@(-1.0),@(0.0),@(1.0),@(2.0),@(3.0),@(4.0),@(5.0),nil];
-    NSMutableArray* yArray = [NSMutableArray arrayWithObjects:@(21.0),@(12.0),@(4.0),@(1.0),@(2.0),@(7.0),@(15.0),@(30.0),@(45.0),@(67.0), nil];
-    int count = xArray.count;
     
-//    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
-//    [self.view addSubview: volumeView];
-//    
-//    annotationNum = 0;
-//    self.liveState=50.0;
-//    self.currentState=50.0;
-//    self.previousState=50.0;
-//    numberOfTimesUpdated=0;
-//    self.milesLabel.text = @"0";
-//    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
-//    [self getSongs];
-//    //[self startStandardUpdates];
-//    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-//    [self startStandardUpdates];
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
+    [self.view addSubview: volumeView];
+    
+    annotationNum = 0;
+    self.liveState=50.0;
+    self.currentState=50.0;
+    self.previousState=50.0;
+    numberOfTimesUpdated=0;
+    self.milesLabel.text = @"0";
+    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
+    [self getSongs];
+    //[self startStandardUpdates];
+    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    [self startStandardUpdates];
 
 }
 
@@ -264,7 +261,7 @@ struct myResult quadReg(int n,double x[],double y[])
         
         if(self.timeLapse&&self.prevLocation!=nil)
         {
-            
+
             double speed = distanceChange/self.timeLapse;
             NSLog(@"sec:%f",self.timeLapse);
             NSLog(@"speed:%f",speed);
