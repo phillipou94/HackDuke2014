@@ -321,7 +321,7 @@ struct myResult quadReg(int n,double x[],double y[])
                     //traveledDist    = [self calcQuadRegWithElemets:self.fixedX.count withX:self.fixedX withY:self.fixedY];
                     NSLog(@"Quad Reg");
                 }
-                else if(self.totalAnnotations.count==2)
+                else if(self.fixedX.count==2)
                 {
                     arcLength = [newLocation distanceFromLocation:self.prevLocation];
                     //only 2 points to use so linear
@@ -376,8 +376,7 @@ struct myResult quadReg(int n,double x[],double y[])
             self.prevLocation = newLocation;
             
             
-            
-            NSLog(@"x:%d,y:%d",self.fixedX.count,self.fixedY.count);
+        
             
             self.fixedX = [NSMutableArray array];
             self.fixedY = [NSMutableArray array];
