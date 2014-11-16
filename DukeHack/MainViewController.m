@@ -18,6 +18,9 @@
 #import "LoadingViewController.h"
 #import <MapKit/MapKit.h>
 #import "AppCommunication.h"
+#import "PulsingHaloLayer.h"
+#import <math.h>
+//#include "PolynomialRegression.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *milesMetricLabel;
@@ -44,6 +47,7 @@
 @property (nonatomic, assign) float currentState;
 @property (nonatomic, assign) float previousState;
 @property (nonatomic, assign) float liveState;
+@property (nonatomic, strong) NSMutableArray* totalAnnotations;
 @end
 
 @implementation MainViewController{
@@ -53,8 +57,89 @@
     int numberOfTimesUpdated;
     bool usingMiles;
 }
-
-
+struct myResult
+{
+    double a;
+    double b;
+    double c;
+};
+struct myResult quadReg(int n,double x[],double y[])
+{
+    int  i, j, k;
+    float sumx, sumxsq, sumy, sumxy;
+    float sumx3, sumx4, sumxsqy, a[20][20], u=0.0, b[20];
+    
+    sumx = 0;
+    sumxsq = 0;
+    sumy = 0;
+    sumxy = 0;
+    sumx3 = 0;
+    sumx4 = 0;
+    sumxsqy = 0;
+    for(i=0;  i<n; i++)
+    {
+        sumx +=x[i];
+        sumxsq += pow(x[i],2);
+        sumx3 += pow(x[i],3);
+        sumx4 += pow(x[i],4);
+        sumy +=y[i];
+        sumxy += x[i] * y[i];
+        sumxsqy += pow(x[i],2) *y[i];
+    }
+    a[0][0] = n;
+    a[0][1] = sumx;
+    a[0][2] = sumxsq;
+    a[0][3] =
+    
+    sumy;
+    a[1][0] = sumx;
+    a[1][1] = sumxsq;
+    a[1][2] = sumx3;
+    a[1][3] = sumxy;
+    a[2][0] = sumxsq;
+    a[2][1] = sumx3;
+    a[2][2] = sumx4;
+    a[2][3] = sumxsqy;
+    
+    for(k=0;  k<=2; k++)
+    {
+        for(i=0;i<=2;i++)
+        {
+            if(i!=k)
+                u=a[i][k]/a[k][k];
+            for(j = k; j<=3; j++)
+                a[i][j]=a[i][j] - u * a[k][j];
+        }
+    }
+    
+    for(i=0;i<3;i++)
+    {
+        b[i] = a[i][3]/a[i][i];
+    }
+    //Printf(“y= %10.4fx +10.4 fx +%10.4f”,b[2],b[i],b[0]);
+    struct myResult temp;
+    temp.a = b[2];
+    temp.b = b[1];
+    temp.c = b[0];
+    return temp;
+}
+-(double)functionateWithCoeffA:(double)a WithCoeffB:(double)b WithX:(double)x
+{
+    double temp = 2*a*x+b;
+    return pow((pow(temp, 2.0)+1.0), .5)*(temp)+asinh(temp);
+}
+-(void)calcQuadRegWithElemets:(int) num withX:(NSMutableArray*)arrayStuff
+{
+    double myX[num];
+    double myY[num];
+    for(int i = 0; i <arrayStuff.count;i++)
+    {
+        myX[i] = ((CLLocation*)arrayStuff[i]).coordinate.latitude;
+        myY[i] = ((CLLocation*)arrayStuff[i]).coordinate.longitude;
+    }
+    struct myResult res = quadReg(num, myX, myY);
+    NSLog(@"%fx^2+%fx+%f",res.a,res.b,res.c);
+}
 -(void)getSongs{
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -83,23 +168,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.totalAnnotations = [NSMutableArray array];
+    NSMutableArray* xArray = [NSMutableArray arrayWithObjects:@(-4.0), @(-3.0),@(-2.0),@(-1.0),@(0.0),@(1.0),@(2.0),@(3.0),@(4.0),@(5.0),nil];
+    NSMutableArray* yArray = [NSMutableArray arrayWithObjects:@(21.0),@(12.0),@(4.0),@(1.0),@(2.0),@(7.0),@(15.0),@(30.0),@(45.0),@(67.0), nil];
+    int count = xArray.count;
     
-    
-    
-    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
-    [self.view addSubview: volumeView];
-    
-    annotationNum = 0;
-    self.liveState=50.0;
-    self.currentState=50.0;
-    self.previousState=50.0;
-    numberOfTimesUpdated=0;
-    self.milesLabel.text = @"0";
-    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
-    [self getSongs];
-    //[self startStandardUpdates];
-    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
-    [self startStandardUpdates];
+//    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame: CGRectZero];
+//    [self.view addSubview: volumeView];
+//    
+//    annotationNum = 0;
+//    self.liveState=50.0;
+//    self.currentState=50.0;
+//    self.previousState=50.0;
+//    numberOfTimesUpdated=0;
+//    self.milesLabel.text = @"0";
+//    [AppCommunication sharedManager].myAnnotations = [NSMutableArray array];
+//    [self getSongs];
+//    //[self startStandardUpdates];
+//    self.musicPlayer = [MPMusicPlayerController applicationMusicPlayer];
+//    [self startStandardUpdates];
 
 }
 
@@ -140,7 +227,7 @@
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
+
     NSLog(@"updatedLocation");
     numberOfTimesUpdated++;
     if(!updatedRecently)
@@ -148,7 +235,7 @@
         updatedRecently = true;
         
         CLLocation *newLocation = [locations lastObject];
-        
+        [self.totalAnnotations addObject:newLocation];
         CLLocationDistance distanceChange = 0;
         if(self.prevLocation!=nil)
         {
@@ -253,7 +340,7 @@
 #pragma mark - Buttons
 
 - (IBAction)beginPressed:(id)sender {
-    
+    [self pulse];
     if(self.beginButton.selected)
     {
         [self.musicPlayer pause];
@@ -362,12 +449,26 @@
 
 -(void)pulseAnimation
 {
-    self.containerView.alpha = 0.5;
-    [UIView animateWithDuration:1.0 animations:^{
-        self.containerView.alpha = 1.0;
-
-    } completion:NULL];
+//    self.containerView.alpha = 0.5;
+//    [UIView animateWithDuration:1.0 animations:^{
+//        self.containerView.alpha = 1.0;
+//
+//    } completion:NULL];
     
 }
-
+-(void)pulse
+{
+    PulsingHaloLayer *halo = [PulsingHaloLayer layer];
+    halo.position = self.view.center;
+    UIColor *color = [UIColor colorWithRed:245.0/255.0
+                                     green:30.0/255.0
+                                      blue:30.0/255.0
+                                     alpha:1.0];
+    
+    halo.backgroundColor = color.CGColor;
+    halo.radius = 240.0;
+    
+    [self.view.layer addSublayer:halo];
+    
+}
 @end
