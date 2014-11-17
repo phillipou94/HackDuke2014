@@ -12,6 +12,8 @@
 
 
 @interface MapViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @end
 
@@ -26,6 +28,8 @@
     [_mapView setDelegate:self];
     _mapView.showsUserLocation = YES;
     [self createMap];
+    self.distanceLabel.text = self.distance;
+    self.timeLabel.text = self.time;
     
 }
 -(void)createMap
@@ -85,5 +89,8 @@
     }
     MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:stepCoordinates count:[AppCommunication sharedManager].myAnnotations.count];
     [_mapView addOverlay:polyLine];
+}
+- (IBAction)donePressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

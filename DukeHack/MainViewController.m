@@ -20,6 +20,7 @@
 #import "AppCommunication.h"
 #import "PulsingHaloLayer.h"
 #import <math.h>
+#import "MapViewController.h"
 //#include "PolynomialRegression.h"
 
 @interface MainViewController ()
@@ -389,7 +390,10 @@ struct myResult quadReg(int n,double x[],double y[])
                 self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(speed*MY_COVERSION)];
             
                 CGFloat roundingValue = 50.0; //round to nearest 50
+
                 self.liveState= ceilf(speed *MY_COVERSION/ roundingValue)*50;
+
+
                 NSLog(@"nice:%f",(self.liveState)/60);
                 self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self
                                                                      selector: @selector(pulseAnimation) userInfo: nil repeats: YES];
@@ -407,10 +411,10 @@ struct myResult quadReg(int n,double x[],double y[])
                     NSLog(@"do nothing");
                 } else{
                     //change playlist
-                    if(self.liveState>150.000000){
-                        [self playPlaylistForState:@"150.000000"];
+                    if(self.liveState>150.00){
+                        [self playPlaylistForState:@"150.00"];
                     } else{
-                        NSString *stateString = [NSString stringWithFormat:@"%f",self.liveState];
+                        NSString *stateString = [NSString stringWithFormat:@"%.2f",self.liveState];
                         NSLog(@"stateSTring:%@",stateString);
                         [self playPlaylistForState:stateString];
                     }
@@ -495,7 +499,7 @@ struct myResult quadReg(int n,double x[],double y[])
     {
         [self pulse];
        // [self buttonPulse:[self.beginButton center]];
-        [self playPlaylistForState:@"50.000000"];
+        [self playPlaylistForState:@"50.00"];
         self.beginButton.selected=YES;
         self.nextButton.hidden=NO;
         self.prevButton.hidden=NO;
@@ -545,6 +549,7 @@ struct myResult quadReg(int n,double x[],double y[])
     [self.musicPlayer pause];
     self.animationTimer=nil;
     [self.halo removeAllAnimations];
+    [self performSegueWithIdentifier:@"showMap" sender:self];
 }
 
 - (void)timerFired:(NSTimer *)timer
@@ -577,15 +582,15 @@ struct myResult quadReg(int n,double x[],double y[])
     __block NSString *stateString=@"";
     if(numberOfTimesUpdated%2==0)
     {
-        stateString=[NSString stringWithFormat:@"%f",self.previousState];
+        stateString=[NSString stringWithFormat:@"%.2f",self.previousState];
         
     }else{
         
-        stateString=[NSString stringWithFormat:@"%f",self.currentState];
+        stateString=[NSString stringWithFormat:@"%.2f",self.currentState];
     }
-    if([stateString isEqualToString:@"0.000000"])
+    if([stateString isEqualToString:@"0.00"])
     {
-     stateString=@"50.000000";
+     stateString=@"50.00";
     }
     [self playPlaylistForState:stateString];
     NSLog(@"pressed:%@",stateString);
@@ -634,6 +639,16 @@ struct myResult quadReg(int n,double x[],double y[])
     halo.backgroundColor = color.CGColor;
     
     
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showMap"])
+    {
+        MapViewController *other = [segue destinationViewController];
+        other.distance = self.milesLabel.text;
+        other.time = self.timeLabel.text;
+        
+    }
 }
 @end
 
