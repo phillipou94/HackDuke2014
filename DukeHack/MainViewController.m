@@ -286,12 +286,22 @@ struct myResult quadReg(int n,double x[],double y[])
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
 
+
+
     NSLog(@"updatedLocation");
     numberOfTimesUpdated++;
     CLLocation *newLocation = [locations lastObject];
     //get current Location
 
     current = newLocation;
+    
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    point.coordinate = newLocation.coordinate;
+    [AppCommunication sharedManager].startPoint = point.coordinate;
+    annotationNum++;
+    point.title = [NSString stringWithFormat: @"%d",annotationNum];
+    point.subtitle = [NSString stringWithFormat: @"swerve"];
+    [[AppCommunication sharedManager].myAnnotations addObject:point];
     
     [self.totalAnnotations addObject:newLocation];
     if(self.fixedX.count==0)
@@ -375,18 +385,11 @@ struct myResult quadReg(int n,double x[],double y[])
                 double speed = arcLength/time;
                 //speed in meters/sec
             
-                MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-                point.coordinate = newLocation.coordinate;
-                [AppCommunication sharedManager].startPoint = point.coordinate;
-                annotationNum++;
-                point.title = [NSString stringWithFormat: @"%d",annotationNum];
-                point.subtitle = [NSString stringWithFormat: @"bpm:%f",(speed*MY_COVERSION)];
-                [[AppCommunication sharedManager].myAnnotations addObject:point];
             
                 self.bpmLabel.text = [NSString stringWithFormat:@"%.2f",(speed*MY_COVERSION)];
             
                 CGFloat roundingValue = 50.0; //round to nearest 50
-                self.liveState= ceilf(speed / roundingValue)*50;
+                self.liveState= ceilf(speed *MY_COVERSION/ roundingValue)*50;
                 NSLog(@"nice:%f",(self.liveState)/60);
                 self.animationTimer = [NSTimer scheduledTimerWithTimeInterval: (self.liveState+50.0)/60 target: self
                                                                      selector: @selector(pulseAnimation) userInfo: nil repeats: YES];

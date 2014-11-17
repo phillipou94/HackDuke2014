@@ -273,11 +273,11 @@
 				TargetAttributes = {
 					4D68B94B1A16AD39003285E4 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = F6J9Z7FPQB;
+						DevelopmentTeam = 8V8HUCA3M9;
 					};
 					4D68B9671A16AD3C003285E4 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = F6J9Z7FPQB;
+						DevelopmentTeam = 8V8HUCA3M9;
 						TestTargetID = 4D68B94B1A16AD39003285E4;
 					};
 				};
