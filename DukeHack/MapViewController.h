@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 @interface MapViewController : UIViewController <MKMapViewDelegate>
+@property (nonatomic, strong) NSString *calories;
+@property (nonatomic, strong) NSString *distance;
+@property (nonatomic, strong) NSString *time;
 
 @end

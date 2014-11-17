@@ -58,6 +58,7 @@
             counter++;
             if(counter ==[arrayOfSongs count]){
                 NSLog(@"Actually done");
+                NSLog(@"%@",self.mapOfTempos);
                 NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
                 SongDictionary *songDic = [NSEntityDescription insertNewObjectForEntityForName:@"SongDictionary" inManagedObjectContext:context];
                 songDic.mapOfTempos=self.mapOfTempos;
@@ -113,7 +114,7 @@
                         if(tempo>0){
                             CGFloat roundingValue = 50.0; //round to nearest 50
                             tempo = floor(tempo / roundingValue);
-                            NSString *tempoString = [NSString stringWithFormat:@"%f",tempo*50 ];
+                            NSString *tempoString = [NSString stringWithFormat:@"%.2f",tempo*50 ];
                             NSMutableArray *array = self.mapOfTempos[tempoString];
                             if(!array){
                                 NSMutableArray *array = [[NSMutableArray alloc]init];
