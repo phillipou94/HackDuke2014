@@ -67,7 +67,7 @@
 -(void)ShowPath
 {
     
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.005, 0.005);
+    MKCoordinateSpan span =  MKCoordinateSpanMake(0.005, 0.005);
     
     MKCoordinateRegion region = MKCoordinateRegionMake([AppCommunication sharedManager].startPoint, span);
     
